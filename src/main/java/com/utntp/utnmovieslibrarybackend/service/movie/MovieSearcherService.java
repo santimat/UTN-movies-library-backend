@@ -1,21 +1,21 @@
 package com.utntp.utnmovieslibrarybackend.service.movie;
 
-import com.utntp.utnmovieslibrarybackend.exception.movie.MovieNotFoundException;
 import com.utntp.utnmovieslibrarybackend.model.movie.Movie;
 import com.utntp.utnmovieslibrarybackend.repository.movie.JpaMovieRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MovieFinderService {
+public class MovieSearcherService {
     private final JpaMovieRepository jpaMovieRepository;
 
 
-    public MovieFinderService(JpaMovieRepository jpaMovieRepository) {
+    public MovieSearcherService(JpaMovieRepository jpaMovieRepository) {
         this.jpaMovieRepository = jpaMovieRepository;
     }
 
-    public Movie find(Long id){
-        return jpaMovieRepository.findById(id)
-                .orElseThrow(()-> new MovieNotFoundException(id));
+    public Page<Movie> findAll(Pageable pageable){
+        return jpaMovieRepository.findAll(pageable);
     }
 }
