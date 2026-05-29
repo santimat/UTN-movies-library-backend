@@ -1,6 +1,7 @@
 package com.utntp.utnmovieslibrarybackend.service.user;
 
-import com.utntp.utnmovieslibrarybackend.dto.request.UserRequest;
+import com.utntp.utnmovieslibrarybackend.dto.request.user.UserRequest;
+import com.utntp.utnmovieslibrarybackend.mapper.user.UserMapper;
 import com.utntp.utnmovieslibrarybackend.model.user.User;
 import org.springframework.stereotype.Service;
 import com.utntp.utnmovieslibrarybackend.repository.user.JpaUserRepository;
