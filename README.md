@@ -7,6 +7,14 @@
 - JWT (Json Web Token)
 - bcrypt (password hashing)
 
+## Deploy guide
+1. Subí tu proyecto a un repo de GitHub
+2. Creá cuenta en render.com
+3. Nuevo servicio → Web Service → conectás el repo
+4. Render detecta que es Java/Maven automáticamente y configura el build
+5. En variables de entorno agregás PORT=8080 (o el que uses)
+6. Deploy → te da una URL pública tipo https://tu-app.onrender.com
+
 ## Data Model
 - User:
   - id (incremental)
