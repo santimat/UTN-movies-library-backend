@@ -25,12 +25,12 @@
 
 - Movie:
   - id (incremental)
+  - director (string)
+  - title (string)
   - synopsis (string)
   - genre (string)
   - year (date)
   - posterURL (string)
-  - rating (number)
-  - averageRating (number)
 
 - Review:
   - id (incremental)
