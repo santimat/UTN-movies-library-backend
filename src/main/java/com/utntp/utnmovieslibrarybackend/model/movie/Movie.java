@@ -19,7 +19,7 @@ public class Movie {
     private String director;
     @Column(nullable = false)
     private Integer year;
-    @Column(nullable = true)
+    @Column()
     private String posterUrl;
 
     public Movie() {
