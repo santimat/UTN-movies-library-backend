@@ -1,5 +1,7 @@
 package com.utntp.utnmovieslibrarybackend.service.movie;
 
+import com.utntp.utnmovieslibrarybackend.dto.request.movie.MovieRequest;
+import com.utntp.utnmovieslibrarybackend.mapper.movie.MovieMapper;
 import com.utntp.utnmovieslibrarybackend.model.movie.Movie;
 import com.utntp.utnmovieslibrarybackend.repository.movie.JpaMovieRepository;
 import org.springframework.stereotype.Service;
