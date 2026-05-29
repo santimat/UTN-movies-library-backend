@@ -5,8 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public class MovieRequest {
-    @NotNull
-    private Long id;
+
     @NotBlank
     private String title;
     @NotBlank
@@ -22,8 +21,7 @@ public class MovieRequest {
 
     public MovieRequest() {
     }
-    public MovieRequest(Long id, String title, String director, String genre, String synopsis, Integer year, @Nullable String posterUrl) {
-        this.id = id;
+    public MovieRequest( String title, String director, String genre, String synopsis, Integer year, @Nullable String posterUrl) {
         this.title = title;
         this.director = director;
         this.genre = genre;
@@ -32,13 +30,6 @@ public class MovieRequest {
         this.posterUrl = posterUrl;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
