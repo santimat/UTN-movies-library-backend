@@ -1,8 +1,8 @@
-package service.user;
+package com.utntp.utnmovieslibrarybackend.service.user;
 
-import org.springframework.boot.security.autoconfigure.SecurityProperties;
+import com.utntp.utnmovieslibrarybackend.model.user.User;
 import org.springframework.stereotype.Service;
-import repository.user.JpaUserRepository;
+import com.utntp.utnmovieslibrarybackend.repository.user.JpaUserRepository;
 
 @Service
 public class UserCreatorService {
