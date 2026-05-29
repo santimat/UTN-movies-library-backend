@@ -1,6 +1,6 @@
 package com.utntp.utnmovieslibrarybackend.service.user;
 
-import com.utntp.utnmovieslibrarybackend.dto.request.UserRequest;
+import com.utntp.utnmovieslibrarybackend.dto.request.user.UserRequest;
 import com.utntp.utnmovieslibrarybackend.model.user.User;
 import com.utntp.utnmovieslibrarybackend.repository.user.JpaUserRepository;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,9 @@ public class UserUpdaterService {
 
     public User update(Long id, UserRequest request){
         User toUpdate = finder.find(id);
-        return jpaUserRepository.save(user);
+        toUpdate.setEmail(request.getEmail());
+        toUpdate.setName(request.getName());
+        toUpdate.setPassword(request.getPassword());
+        return jpaUserRepository.save(toUpdate);
     }
-
 }
