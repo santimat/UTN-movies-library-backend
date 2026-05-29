@@ -1,5 +1,6 @@
 package com.utntp.utnmovieslibrarybackend.service.user;
 
+import com.utntp.utnmovieslibrarybackend.exception.user.UserNotFoundException;
 import com.utntp.utnmovieslibrarybackend.model.user.User;
 import com.utntp.utnmovieslibrarybackend.repository.user.JpaUserRepository;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ public class UserFinderService {
 
     public User find(Long id){
         return jpaUserRepository.findById(id)
-                .orElseThrow(()-> new UserNotFoundexception(id));
+                .orElseThrow(()-> new UserNotFoundException(id));
 
     }
 }
