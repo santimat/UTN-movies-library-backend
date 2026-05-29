@@ -2,21 +2,23 @@ package com.utntp.utnmovieslibrarybackend.service.user;
 
 import com.utntp.utnmovieslibrarybackend.dto.request.UserRequest;
 import com.utntp.utnmovieslibrarybackend.model.user.User;
-import org.springframework.stereotype.Service;
 import com.utntp.utnmovieslibrarybackend.repository.user.JpaUserRepository;
+import org.springframework.stereotype.Service;
 
 @Service
-public class UserCreatorService {
+public class UserUpdaterService {
     private final JpaUserRepository jpaUserRepository;
-    private final UserMapper userMapper;
+    private final UserFinderService finder;
 
-    public UserCreatorService(JpaUserRepository jpaUserRepository, UserMapper userMapper){
+
+    public UserUpdaterService(JpaUserRepository jpaUserRepository,  UserFinderService finder) {
         this.jpaUserRepository = jpaUserRepository;
-        this.userMapper = userMapper;
+        this.finder = finder;
     }
 
-    public User create(UserRequest request){
-        User user = userMapper.toEntity(request);
+    public User update(Long id, UserRequest request){
+        User toUpdate = finder.find(id);
         return jpaUserRepository.save(user);
     }
+
 }
