@@ -6,16 +6,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class MovieDeleterService {
     private final JpaMovieRepository jpaMovieRepository;
-    private final MovieFinderService finder;
+    private final MovieFinderService movieFinderService;
 
 
-    public MovieDeleterService(JpaMovieRepository jpaMovieRepository, MovieFinderService finder) {
+    public MovieDeleterService(JpaMovieRepository jpaMovieRepository, MovieFinderService movieFinderService) {
         this.jpaMovieRepository = jpaMovieRepository;
-        this.finder = finder;
+        this.movieFinderService = movieFinderService;
     }
 
     public void deleter(Long id){
-        finder.find(id);
+        movieFinderService.find(id);
         jpaMovieRepository.deleteById(id);
     }
 }

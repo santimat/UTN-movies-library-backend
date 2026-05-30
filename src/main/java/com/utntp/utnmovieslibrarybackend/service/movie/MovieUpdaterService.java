@@ -8,16 +8,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class MovieUpdaterService {
     private final JpaMovieRepository jpaMovieRepository;
-    private final MovieFinderService finder;
+    private final MovieFinderService movieFinderService;
 
 
-    public MovieUpdaterService(JpaMovieRepository jpaMovieRepository, MovieFinderService finder) {
+    public MovieUpdaterService(JpaMovieRepository jpaMovieRepository, MovieFinderService movieFinderService) {
         this.jpaMovieRepository = jpaMovieRepository;
-        this.finder = finder;
+        this.movieFinderService = movieFinderService;
     }
 
     public Movie update(Long id, MovieRequest request){
-        Movie toUpdate = finder.find(id);
+        Movie toUpdate = movieFinderService.find(id);
         toUpdate.setDirector(request.getDirector());
         toUpdate.setGenre(request.getGenre());
         toUpdate.setSynopsis(request.getSynopsis());

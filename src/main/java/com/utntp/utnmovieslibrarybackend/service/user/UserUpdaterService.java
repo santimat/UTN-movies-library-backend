@@ -8,16 +8,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserUpdaterService {
     private final JpaUserRepository jpaUserRepository;
-    private final UserFinderService finder;
+    private final UserFinderService userFinderService;
 
 
-    public UserUpdaterService(JpaUserRepository jpaUserRepository,  UserFinderService finder) {
+    public UserUpdaterService(JpaUserRepository jpaUserRepository,  UserFinderService userFinderService) {
         this.jpaUserRepository = jpaUserRepository;
-        this.finder = finder;
+        this.userFinderService = userFinderService;
     }
 
     public User update(Long id, UserRequest request){
-        User toUpdate = finder.find(id);
+        User toUpdate = userFinderService.find(id);
         toUpdate.setEmail(request.getEmail());
         toUpdate.setName(request.getName());
         toUpdate.setPassword(request.getPassword());

@@ -8,16 +8,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class ReviewUpdaterService {
     private final JpaReviewRepository jpaReviewRepository;
-    private final ReviewFinderService finder;
+    private final ReviewFinderService reviewFinderService;
 
 
-    public ReviewUpdaterService(JpaReviewRepository jpaReviewRepository, ReviewFinderService finder) {
+    public ReviewUpdaterService(JpaReviewRepository jpaReviewRepository, ReviewFinderService reviewFinderService) {
         this.jpaReviewRepository = jpaReviewRepository;
-        this.finder = finder;
+        this.reviewFinderService = reviewFinderService;
     }
 
     public Review update(Long id, ReviewRequest request){
-        Review review = finder.find(id);
+        Review review = reviewFinderService.find(id);
         review.setRating(request.getRating());
         review.setComment(request.getComment());
         review.setMovieId(request.getMovieId());
