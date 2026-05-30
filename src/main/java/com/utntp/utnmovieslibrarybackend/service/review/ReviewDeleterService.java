@@ -6,16 +6,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class ReviewDeleterService {
     private final JpaReviewRepository jpaReviewRepository;
-    private final ReviewFinderService finder;
+    private final ReviewFinderService reviewFinderService;
 
 
-    public ReviewDeleterService(JpaReviewRepository jpaReviewRepository, ReviewFinderService finder) {
+    public ReviewDeleterService(JpaReviewRepository jpaReviewRepository, ReviewFinderService reviewFinderService) {
         this.jpaReviewRepository = jpaReviewRepository;
-        this.finder = finder;
+        this.reviewFinderService = reviewFinderService;
     }
 
     public void deleter(Long id){
-        finder.find(id);
+        reviewFinderService.find(id);
         jpaReviewRepository.deleteById(id);
     }
 }

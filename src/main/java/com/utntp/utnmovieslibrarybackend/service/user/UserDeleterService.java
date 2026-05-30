@@ -6,16 +6,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDeleterService {
     private final JpaUserRepository jpaUserRepository;
-    private final UserFinderService finder;
+    private final UserFinderService userFinderService;
 
 
-    public UserDeleterService(JpaUserRepository jpaUserRepository, UserFinderService finder) {
+    public UserDeleterService(JpaUserRepository jpaUserRepository, UserFinderService userFinderService) {
         this.jpaUserRepository = jpaUserRepository;
-        this.finder = finder;
+        this.userFinderService = userFinderService;
     }
 
     public void deleter(Long id){
-        finder.find(id);
+        userFinderService.find(id);
         jpaUserRepository.deleteById(id);
     }
 }
