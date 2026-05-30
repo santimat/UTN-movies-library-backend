@@ -24,7 +24,7 @@ public class JwtFilter extends OncePerRequestFilter {
         // Skip JWT validation for login or register
         String path = request.getRequestURI();
         String method = request.getMethod();
-        boolean isLogin = path.contains("/api/auth/login") && method.equals("POST");
+        boolean isLogin = path.contains("/api/auth/login");
         boolean isSignIn = path.contains("/api/users") && method.equals("POST");
         if(isLogin || isSignIn) {
             filterChain.doFilter(request,response);
