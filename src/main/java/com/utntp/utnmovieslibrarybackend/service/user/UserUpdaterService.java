@@ -16,11 +16,11 @@ public class UserUpdaterService {
         this.userFinderService = userFinderService;
     }
 
-    public User update(Long id, UserRequest request){
+    public User update(Long id, UserRequest userRequest){
         User toUpdate = userFinderService.find(id);
-        toUpdate.setEmail(request.getEmail());
-        toUpdate.setName(request.getName());
-        toUpdate.setPassword(request.getPassword());
+        toUpdate.setEmail(userRequest.getEmail());
+        toUpdate.setName(userRequest.getName());
+        toUpdate.setPassword(userRequest.getPassword());
         return jpaUserRepository.save(toUpdate);
     }
 }

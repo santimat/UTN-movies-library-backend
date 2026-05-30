@@ -17,8 +17,8 @@ public class ReviewCreatorService {
         this.reviewMapper = reviewMapper;
     }
 
-    public Review create(ReviewRequest request){
-        Review review = reviewMapper.toEntity(request);
+    public Review create(ReviewRequest reviewRequest){
+        Review review = reviewMapper.toEntity(reviewRequest);
         return jpaReviewRepository.save(review);
     }
 }

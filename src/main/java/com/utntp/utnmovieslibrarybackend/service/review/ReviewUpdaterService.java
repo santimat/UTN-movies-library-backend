@@ -16,11 +16,11 @@ public class ReviewUpdaterService {
         this.reviewFinderService = reviewFinderService;
     }
 
-    public Review update(Long id, ReviewRequest request){
+    public Review update(Long id, ReviewRequest reviewRequest){
         Review review = reviewFinderService.find(id);
-        review.setRating(request.getRating());
-        review.setComment(request.getComment());
-        review.setMovieId(request.getMovieId());
+        review.setRating(reviewRequest.getRating());
+        review.setComment(reviewRequest.getComment());
+        review.setMovieId(reviewRequest.getMovieId());
         return jpaReviewRepository.save(review);
     }
 }

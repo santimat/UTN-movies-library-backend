@@ -16,8 +16,8 @@ public class UserCreatorService {
         this.userMapper = userMapper;
     }
 
-    public User create(UserRequest request){
-        User user = userMapper.toEntity(request);
+    public User create(UserRequest userRequest){
+        User user = userMapper.toEntity(userRequest);
         return jpaUserRepository.save(user);
     }
 }
