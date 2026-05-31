@@ -7,11 +7,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MovieSearcherService {
+public class MoviesSearcherService {
     private final JpaMovieRepository jpaMovieRepository;
 
 
-    public MovieSearcherService(JpaMovieRepository jpaMovieRepository) {
+    public MoviesSearcherService(JpaMovieRepository jpaMovieRepository) {
         this.jpaMovieRepository = jpaMovieRepository;
     }
 

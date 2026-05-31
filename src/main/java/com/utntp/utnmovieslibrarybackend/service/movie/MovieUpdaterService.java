@@ -16,14 +16,14 @@ public class MovieUpdaterService {
         this.movieFinderService = movieFinderService;
     }
 
-    public Movie update(Long id, MovieRequest request){
+    public Movie update(Long id, MovieRequest movieRequest){
         Movie toUpdate = movieFinderService.find(id);
-        toUpdate.setDirector(request.getDirector());
-        toUpdate.setGenre(request.getGenre());
-        toUpdate.setSynopsis(request.getSynopsis());
-        toUpdate.setTitle(request.getTitle());
-        toUpdate.setYear(request.getYear());
-        toUpdate.setPosterUrl(request.getPosterUrl());
+        toUpdate.setDirector(movieRequest.getDirector());
+        toUpdate.setGenre(movieRequest.getGenre());
+        toUpdate.setSynopsis(movieRequest.getSynopsis());
+        toUpdate.setTitle(movieRequest.getTitle());
+        toUpdate.setYear(movieRequest.getYear());
+        toUpdate.setPosterUrl(movieRequest.getPosterUrl());
         return jpaMovieRepository.save(toUpdate);
     }
 }

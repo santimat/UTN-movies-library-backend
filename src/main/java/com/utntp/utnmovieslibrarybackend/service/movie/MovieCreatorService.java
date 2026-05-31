@@ -17,8 +17,8 @@ public class MovieCreatorService {
         this.movieMapper = movieMapper;
     }
 
-    public Movie create(MovieRequest request){
-        Movie movie = movieMapper.toEntity(request);
+    public Movie create(MovieRequest movieRequest){
+        Movie movie = movieMapper.toEntity(movieRequest);
         return jpaMovieRepository.save(movie);
     }
 }

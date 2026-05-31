@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("api/users")
 public class UserPostController {
     private final UserCreatorService userCreatorService;
     private final UserMapper userMapper;
