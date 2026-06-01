@@ -1,5 +1,7 @@
 package com.utntp.utnmovieslibrarybackend.model.review;
 
+import com.utntp.utnmovieslibrarybackend.model.movie.Movie;
+import com.utntp.utnmovieslibrarybackend.model.user.User;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,20 +15,22 @@ public class Review {
     private Integer rating;
     @Column(nullable = false)
     private String comment;
-    @Column(nullable = false)
-    private Long userId;
-    @Column(nullable = false)
-    private Long movieId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+    @ManyToOne
+    @JoinColumn(name = "movie_id", nullable = false)
+    private Movie movie;
 
     public Review() {
     }
 
-    public Review(Long id, Integer rating, String comment, Long userId, Long movieId) {
+    public Review(Long id, Integer rating, String comment, User user, Movie movie) {
         this.id = id;
         this.rating = rating;
         this.comment = comment;
-        this.userId = userId;
-        this.movieId = movieId;
+        this.user = user;
+        this.movie = movie;
     }
 
     public Long getId() {
@@ -53,19 +57,19 @@ public class Review {
         this.comment = comment;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Long getMovieId() {
-        return movieId;
+    public Movie getMovie() {
+        return movie;
     }
 
-    public void setMovieId(Long movieId) {
-        this.movieId = movieId;
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 }
