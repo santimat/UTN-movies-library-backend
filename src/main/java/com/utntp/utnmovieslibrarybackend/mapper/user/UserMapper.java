@@ -14,7 +14,6 @@ public class UserMapper {
         user.setName(request.getName());
         user.setEmail(request.getEmail());
         user.setPassword(request.getPassword());
-        user.setRole("USER");
         return user;
     }
     public UserResponse toResponse(User user){
@@ -22,7 +21,7 @@ public class UserMapper {
                 user.getId(),
                 user.getName(),
                 user.getEmail(),
-                user.getRole()
+                user.getRole().toString()
         );
     }
 

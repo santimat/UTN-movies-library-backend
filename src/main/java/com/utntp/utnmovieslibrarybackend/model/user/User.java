@@ -1,6 +1,8 @@
 package com.utntp.utnmovieslibrarybackend.model.user;
 
+import com.utntp.utnmovieslibrarybackend.enums.UserRoleEnum;
 import jakarta.persistence.*;
+
 
 @Entity
 @Table(name="users")
@@ -15,18 +17,18 @@ public class User {
     private String email;
     @Column(nullable = false)
     private String password;
+    @Enumerated(EnumType.STRING) // saves "ADMIN" or "USER" instead of 1 or 0
     @Column(nullable = false)
-    private String role;
+    private UserRoleEnum role = UserRoleEnum.USER;
 
     public User() {
     }
 
-    public User(Long id, String name, String email, String password, String role) {
+    public User(Long id, String name, String email, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.role = role;
     }
 
     public Long getId() {
@@ -61,11 +63,11 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
+    public UserRoleEnum getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(UserRoleEnum role) {
         this.role = role;
     }
 }

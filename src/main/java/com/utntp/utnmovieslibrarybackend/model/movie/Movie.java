@@ -1,6 +1,7 @@
 package com.utntp.utnmovieslibrarybackend.model.movie;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 
 @Entity
 @Table(name="movies")
@@ -11,13 +12,14 @@ public class Movie {
     private Long id;
     @Column(nullable = false)
     private String title;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 2000)
     private String synopsis;
     @Column(nullable = false)
     private String genre;
     @Column(nullable = false)
     private String director;
     @Column(nullable = false)
+    @Min(1888) // The year of the first movie ever made
     private Integer year;
     @Column()
     private String posterUrl;

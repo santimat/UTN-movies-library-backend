@@ -3,6 +3,8 @@ package com.utntp.utnmovieslibrarybackend.model.review;
 import com.utntp.utnmovieslibrarybackend.model.movie.Movie;
 import com.utntp.utnmovieslibrarybackend.model.user.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 
 @Entity
 @Table(name="reviews")
@@ -12,8 +14,9 @@ public class Review {
     private Long id;
 
     @Column(nullable = false)
+    @Min(1) @Max(5)
     private Integer rating;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1000)
     private String comment;
     // FetchType.LAZY prevents that JPA loads the whole asociated data for each query
     @ManyToOne(fetch = FetchType.LAZY)
