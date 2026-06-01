@@ -17,9 +17,9 @@ public class MovieGetController {
     private final MovieMapper movieMapper;
 
 
-    public MovieGetController(MovieFinderService movieFinderService, MovieMapper movieMapper) {
+    public MovieGetController(MovieFinderService movieFinderService) {
         this.movieFinderService = movieFinderService;
-        this.movieMapper = movieMapper;
+        this.movieMapper = new MovieMapper();
     }
 
     @GetMapping("/{id}")

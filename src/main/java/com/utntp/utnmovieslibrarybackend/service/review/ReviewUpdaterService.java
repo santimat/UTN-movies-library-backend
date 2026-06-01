@@ -20,7 +20,6 @@ public class ReviewUpdaterService {
         Review review = reviewFinderService.find(id);
         review.setRating(reviewRequest.getRating());
         review.setComment(reviewRequest.getComment());
-        review.setMovieId(reviewRequest.getMovieId());
         return jpaReviewRepository.save(review);
     }
 }

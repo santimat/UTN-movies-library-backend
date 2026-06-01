@@ -16,9 +16,9 @@ public class ReviewPutController {
     private final ReviewMapper reviewMapper;
 
 
-    public ReviewPutController(ReviewUpdaterService reviewUpdaterService, ReviewMapper reviewMapper) {
+    public ReviewPutController(ReviewUpdaterService reviewUpdaterService) {
         this.reviewUpdaterService = reviewUpdaterService;
-        this.reviewMapper = reviewMapper;
+        this.reviewMapper = new ReviewMapper();
     }
 
     @PutMapping("/{id}")

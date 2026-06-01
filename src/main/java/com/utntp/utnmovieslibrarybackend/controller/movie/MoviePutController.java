@@ -16,9 +16,9 @@ public class MoviePutController {
     private final MovieMapper movieMapper;
 
 
-    public MoviePutController(MovieUpdaterService movieUpdaterService, MovieMapper movieMapper) {
+    public MoviePutController(MovieUpdaterService movieUpdaterService) {
         this.movieUpdaterService = movieUpdaterService;
-        this.movieMapper = movieMapper;
+        this.movieMapper = new MovieMapper();
     }
 
     @PutMapping("/{id}")

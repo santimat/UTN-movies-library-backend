@@ -17,9 +17,9 @@ public class ReviewGetController {
     private final ReviewMapper reviewMapper;
 
 
-    public ReviewGetController(ReviewFinderService reviewFinderService, ReviewMapper reviewMapper) {
+    public ReviewGetController(ReviewFinderService reviewFinderService) {
         this.reviewFinderService = reviewFinderService;
-        this.reviewMapper = reviewMapper;
+        this.reviewMapper = new ReviewMapper();
     }
 
     @GetMapping("/{id}")

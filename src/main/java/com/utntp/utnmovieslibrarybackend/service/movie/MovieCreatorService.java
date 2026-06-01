@@ -12,9 +12,9 @@ public class MovieCreatorService {
     private final MovieMapper movieMapper;
 
 
-    public MovieCreatorService(JpaMovieRepository jpaMovieRepository, MovieMapper movieMapper) {
+    public MovieCreatorService(JpaMovieRepository jpaMovieRepository) {
         this.jpaMovieRepository = jpaMovieRepository;
-        this.movieMapper = movieMapper;
+        this.movieMapper = new MovieMapper();
     }
 
     public Movie create(MovieRequest movieRequest){

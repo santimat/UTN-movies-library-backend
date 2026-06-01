@@ -20,9 +20,9 @@ public class UsersGetController {
     private final UserMapper userMapper;
 
 
-    public UsersGetController(UsersSearcherService usersSearcherService, UserMapper userMapper) {
+    public UsersGetController(UsersSearcherService usersSearcherService) {
         this.usersSearcherService = usersSearcherService;
-        this.userMapper = userMapper;
+        this.userMapper = new UserMapper();
     }
 
     @GetMapping

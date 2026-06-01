@@ -19,9 +19,9 @@ public class ReviewPostController {
     private final ReviewCreatorService reviewCreatorService;
     private final ReviewMapper reviewMapper;
 
-    public ReviewPostController(ReviewCreatorService reviewCreatorService, ReviewMapper reviewMapper) {
+    public ReviewPostController(ReviewCreatorService reviewCreatorService) {
         this.reviewCreatorService = reviewCreatorService;
-        this.reviewMapper = reviewMapper;
+        this.reviewMapper = new ReviewMapper();
     }
 
 

@@ -20,9 +20,9 @@ public class MoviePostController {
     private final MovieMapper movieMapper;
 
 
-    public MoviePostController(MovieCreatorService movieCreatorService, MovieMapper movieMapper) {
+    public MoviePostController(MovieCreatorService movieCreatorService) {
         this.movieCreatorService = movieCreatorService;
-        this.movieMapper = movieMapper;
+        this.movieMapper = new MovieMapper();
     }
 
     @PostMapping

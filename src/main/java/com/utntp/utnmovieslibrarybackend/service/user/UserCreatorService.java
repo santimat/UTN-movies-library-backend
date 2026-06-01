@@ -11,9 +11,9 @@ public class UserCreatorService {
     private final JpaUserRepository jpaUserRepository;
     private final UserMapper userMapper;
 
-    public UserCreatorService(JpaUserRepository jpaUserRepository, UserMapper userMapper){
+    public UserCreatorService(JpaUserRepository jpaUserRepository){
         this.jpaUserRepository = jpaUserRepository;
-        this.userMapper = userMapper;
+        this.userMapper = new UserMapper();
     }
 
     public User create(UserRequest userRequest){

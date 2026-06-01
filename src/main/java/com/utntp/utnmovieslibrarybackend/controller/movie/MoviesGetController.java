@@ -20,9 +20,9 @@ public class MoviesGetController {
     private final MovieMapper movieMapper;
 
 
-    public MoviesGetController(MoviesSearcherService moviesSearcherService, MovieMapper movieMapper) {
+    public MoviesGetController(MoviesSearcherService moviesSearcherService) {
         this.moviesSearcherService = moviesSearcherService;
-        this.movieMapper = movieMapper;
+        this.movieMapper = new MovieMapper();
     }
 
     @GetMapping

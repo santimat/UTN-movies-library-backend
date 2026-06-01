@@ -20,9 +20,9 @@ public class ReviewsGetController {
     private final ReviewMapper reviewMapper;
 
 
-    public ReviewsGetController(ReviewsSearcherService reviewsSearcherService, ReviewMapper reviewMapper) {
+    public ReviewsGetController(ReviewsSearcherService reviewsSearcherService) {
         this.reviewsSearcherService = reviewsSearcherService;
-        this.reviewMapper = reviewMapper;
+        this.reviewMapper = new ReviewMapper();
     }
 
     @GetMapping

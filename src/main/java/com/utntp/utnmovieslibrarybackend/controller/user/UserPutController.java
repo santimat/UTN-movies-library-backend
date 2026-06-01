@@ -16,9 +16,9 @@ public class UserPutController {
     private final UserMapper userMapper;
 
 
-    public UserPutController(UserUpdaterService userUpdaterService, UserMapper userMapper) {
+    public UserPutController(UserUpdaterService userUpdaterService) {
         this.userUpdaterService = userUpdaterService;
-        this.userMapper = userMapper;
+        this.userMapper = new UserMapper();
     }
 
     @PutMapping("/{id}")

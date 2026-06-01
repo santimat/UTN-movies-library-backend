@@ -16,9 +16,9 @@ public class UserGetController {
     private final UserMapper userMapper;
     private final UserFinderService userFinderService;
 
-    public UserGetController(UserMapper userMapper, UserFinderService userFinderService) {
-        this.userMapper = userMapper;
+    public UserGetController( UserFinderService userFinderService) {
         this.userFinderService = userFinderService;
+        this.userMapper = new UserMapper();
     }
 
     @GetMapping("/{id}")

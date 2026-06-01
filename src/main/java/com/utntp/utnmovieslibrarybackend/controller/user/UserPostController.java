@@ -20,9 +20,9 @@ public class UserPostController {
     private final UserMapper userMapper;
 
 
-    public UserPostController(UserCreatorService userCreatorService, UserMapper userMapper) {
+    public UserPostController(UserCreatorService userCreatorService) {
         this.userCreatorService = userCreatorService;
-        this.userMapper = userMapper;
+        this.userMapper = new UserMapper();
     }
 
     @PostMapping

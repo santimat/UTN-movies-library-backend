@@ -15,9 +15,9 @@ public class ReviewCreatorService {
     private final MovieFinderService movieFinderService;
 
 
-    public ReviewCreatorService(JpaReviewRepository jpaReviewRepository, ReviewMapper reviewMapper, MovieFinderService movieFinderService) {
+    public ReviewCreatorService(JpaReviewRepository jpaReviewRepository,  MovieFinderService movieFinderService) {
         this.jpaReviewRepository = jpaReviewRepository;
-        this.reviewMapper = reviewMapper;
+        this.reviewMapper = new ReviewMapper();
         this.movieFinderService = movieFinderService;
     }
 
