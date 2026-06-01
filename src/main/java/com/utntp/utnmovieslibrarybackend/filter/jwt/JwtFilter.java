@@ -1,5 +1,6 @@
 package com.utntp.utnmovieslibrarybackend.filter.jwt;
 
+import com.utntp.utnmovieslibrarybackend.service.jwt.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

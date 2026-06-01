@@ -38,7 +38,7 @@ public class JwtService {
 
     }
 
-    public boolean isValid(String token){
+    public boolean isTokenValid(String token){
         try{
             Jwts.parser().verifyWith((SecretKey) getKey()).build().parseSignedClaims(token);
             return true;
