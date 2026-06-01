@@ -15,10 +15,11 @@ public class Review {
     private Integer rating;
     @Column(nullable = false)
     private String comment;
-    @ManyToOne
+    // FetchType.LAZY prevents that JPA loads the whole asociated data for each query
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id", nullable = false)
     private Movie movie;
 
