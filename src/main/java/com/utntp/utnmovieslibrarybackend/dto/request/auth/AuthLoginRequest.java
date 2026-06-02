@@ -1,12 +1,12 @@
 package com.utntp.utnmovieslibrarybackend.dto.request.auth;
 
-public class LoginRequest {
+public class AuthLoginRequest {
     private String email;
     private String password;
 
-    public LoginRequest(){}
+    public AuthLoginRequest(){}
 
-    public LoginRequest(String email, String password){
+    public AuthLoginRequest(String email, String password){
         this.email = email;
         this.password = password;
     }

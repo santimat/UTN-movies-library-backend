@@ -13,10 +13,10 @@ public class UserCreatorService {
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
 
-    public UserCreatorService(JpaUserRepository jpaUserRepository, UserMapper userMapper, PasswordEncoder passwordEncoder){
+    public UserCreatorService(JpaUserRepository jpaUserRepository, PasswordEncoder passwordEncoder){
         this.jpaUserRepository = jpaUserRepository;
-        this.userMapper = userMapper;
         this.passwordEncoder = passwordEncoder;
+        this.userMapper = new UserMapper();
     }
 
     public User create(UserRequest request){

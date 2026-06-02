@@ -14,11 +14,12 @@ public class ReviewMapper {
         Review review = new Review();
         review.setRating(request.getRating());
         review.setComment(request.getComment());
-        review.setMovie(movie); // esto seguro esta mal pero no se de que otra forma hacerlo
+        review.setMovie(movie);
         return review;
     }
 
     public ReviewResponse toResponse(Review review){
-        return new ReviewResponse(review.getId(), review.getRating(), review.getComment(), review.getMovie().getId());
+        return new ReviewResponse(review.getId(), review.getMovie().getTitle(),review.getRating(),
+                review.getComment(), review.getMovie().getId());
     }
 }

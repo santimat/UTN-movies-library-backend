@@ -22,7 +22,7 @@ public class UserPutController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserResponse> put(@PathVariable Long id,
+    public ResponseEntity<UserResponse> updateById(@PathVariable Long id,
                                             @Valid @RequestBody UserRequest userRequest){
         User user = userUpdaterService.update(id, userRequest);
         UserResponse userResponse = userMapper.toResponse(user);

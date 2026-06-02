@@ -22,7 +22,7 @@ public class UserGetController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponse> get(@PathVariable Long id){
+    public ResponseEntity<UserResponse> getById(@PathVariable Long id){
         User user = userFinderService.find(id);
         UserResponse userResponse = userMapper.toResponse(user);
         return ResponseEntity.ok(userResponse);

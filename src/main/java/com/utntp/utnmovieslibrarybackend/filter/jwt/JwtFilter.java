@@ -1,5 +1,6 @@
 package com.utntp.utnmovieslibrarybackend.filter.jwt;
 
+import com.utntp.utnmovieslibrarybackend.enums.UserRoleEnum;
 import com.utntp.utnmovieslibrarybackend.service.jwt.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -42,8 +43,6 @@ public class JwtFilter extends OncePerRequestFilter {
 
         // extract token, if header is "Bearer misupertoken" we just keep "misupertoken"
         String token = authHeader.substring(7);
-        // get the payload from the JWT
-        String email = jwtService.extractEmail(token);
 
         if(!jwtService.isTokenValid(token)){
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

@@ -26,8 +26,8 @@ public class UsersGetController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<UserResponse>> getAll(@RequestParam int page,
-                                                     @RequestParam int size){
+    public ResponseEntity<Page<UserResponse>> getAll(@RequestParam(defaultValue = "0") int page,
+                                                     @RequestParam(defaultValue = "5") int size){
         Pageable pageable = PageRequest.of(page, size);
         Page<User> users = usersSearcherService.findAll(pageable);
         return ResponseEntity.ok(
