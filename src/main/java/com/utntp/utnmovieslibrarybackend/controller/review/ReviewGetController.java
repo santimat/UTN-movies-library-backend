@@ -23,7 +23,7 @@ public class ReviewGetController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ReviewResponse> get(@PathVariable Long id){
+    public ResponseEntity<ReviewResponse> getReviewById(@PathVariable Long id){
         Review review = reviewFinderService.find(id);
         ReviewResponse reviewResponse = reviewMapper.toResponse(review);
         return ResponseEntity.ok(reviewResponse);

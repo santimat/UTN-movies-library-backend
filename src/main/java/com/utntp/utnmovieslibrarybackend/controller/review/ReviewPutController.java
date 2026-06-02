@@ -22,7 +22,7 @@ public class ReviewPutController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ReviewResponse> put(@PathVariable Long id,
+    public ResponseEntity<ReviewResponse> updateReviewById(@PathVariable Long id,
                                               @Valid @RequestBody ReviewRequest reviewRequest){
         Review review = reviewUpdaterService.update(id, reviewRequest);
         ReviewResponse reviewResponse = reviewMapper.toResponse(review);

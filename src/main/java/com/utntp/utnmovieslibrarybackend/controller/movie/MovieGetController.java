@@ -23,7 +23,7 @@ public class MovieGetController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MovieResponse> getById(@PathVariable Long id){
+    public ResponseEntity<MovieResponse> getMovieById(@PathVariable Long id){
         Movie movie = movieFinderService.find(id);
         MovieResponse movieResponse = movieMapper.toResponse(movie);
         return ResponseEntity.ok(movieResponse);

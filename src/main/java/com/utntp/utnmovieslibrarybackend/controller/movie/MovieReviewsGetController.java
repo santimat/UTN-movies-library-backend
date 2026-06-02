@@ -27,6 +27,6 @@ public class MovieReviewsGetController {
                                               @RequestParam(defaultValue = "5") int size){
         Pageable pageable = PageRequest.of(page,size);
         Page<Review> reviews = reviewFinderByMovieService.getByMovieId(movieId, pageable);
-        return ResponseEntity.ok(reviews.map(review -> reviewMapper.toResponse(review)));
+        return ResponseEntity.ok(reviews.map(reviewMapper::toResponse));
     }
 }
