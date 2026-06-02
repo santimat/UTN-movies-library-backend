@@ -1,7 +1,6 @@
 package com.utntp.utnmovieslibrarybackend.service.auth;
 
 import com.utntp.utnmovieslibrarybackend.dto.request.auth.AuthLoginRequest;
-import com.utntp.utnmovieslibrarybackend.dto.response.auth.AuthLoginResponse;
 import com.utntp.utnmovieslibrarybackend.exception.auth.WrongPasswordException;
 import com.utntp.utnmovieslibrarybackend.exception.user.UserNotFoundByEmailException;
 import com.utntp.utnmovieslibrarybackend.model.user.User;
