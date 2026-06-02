@@ -1,5 +1,6 @@
 package com.utntp.utnmovieslibrarybackend.model.movie;
 
+import com.utntp.utnmovieslibrarybackend.model.genre.Genre;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 
@@ -14,8 +15,9 @@ public class Movie {
     private String title;
     @Column(nullable = false, length = 2000)
     private String synopsis;
-    @Column(nullable = false)
-    private String genre;
+    @ManyToOne(fetch =  FetchType.LAZY)
+    @JoinColumn(name = "genre_id", nullable = false)
+    private Genre genre;
     @Column(nullable = false)
     private String director;
     @Column(nullable = false)
@@ -27,7 +29,7 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(Long id, String title, String synopsis, String genre, String director, Integer year, String posterUrl) {
+    public Movie(Long id, String title, String synopsis, Genre genre, String director, Integer year, String posterUrl) {
         this.id = id;
         this.title = title;
         this.synopsis = synopsis;
@@ -61,11 +63,11 @@ public class Movie {
         this.synopsis = synopsis;
     }
 
-    public String getGenre() {
+    public Genre getGenre() {
         return genre;
     }
 
-    public void setGenre(String genre) {
+    public void setGenre(Genre genre) {
         this.genre = genre;
     }
 
