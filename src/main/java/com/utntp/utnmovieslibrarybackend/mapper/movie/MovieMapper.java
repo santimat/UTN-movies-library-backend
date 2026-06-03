@@ -2,6 +2,7 @@ package com.utntp.utnmovieslibrarybackend.mapper.movie;
 
 import com.utntp.utnmovieslibrarybackend.dto.request.movie.MovieRequest;
 import com.utntp.utnmovieslibrarybackend.dto.response.movie.MovieResponse;
+import com.utntp.utnmovieslibrarybackend.model.genre.Genre;
 import com.utntp.utnmovieslibrarybackend.model.movie.Movie;
 
 public class MovieMapper {
@@ -9,11 +10,11 @@ public class MovieMapper {
     public MovieMapper() {
     }
 
-    public Movie toEntity(MovieRequest request){
+    public Movie toEntity(MovieRequest request, Genre genre){
         Movie movie = new Movie();
         movie.setTitle(request.getTitle());
         movie.setDirector(request.getDirector());
-        movie.setGenre(request.getGenre());
+        movie.setGenre(genre);
         movie.setSynopsis(request.getSynopsis());
         movie.setYear(request.getYear());
         movie.setPosterUrl(request.getPosterUrl());
@@ -21,6 +22,6 @@ public class MovieMapper {
     }
 
     public MovieResponse toResponse(Movie movie){
-        return new MovieResponse(movie.getId(), movie.getTitle(), movie.getDirector(), movie.getGenre(), movie.getSynopsis(), movie.getYear(), movie.getPosterUrl());
+        return new MovieResponse(movie.getId(), movie.getTitle(), movie.getDirector(), movie.getGenre().getId(), movie.getSynopsis(), movie.getYear(), movie.getPosterUrl());
     }
 }
