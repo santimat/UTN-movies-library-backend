@@ -12,9 +12,9 @@ public class GenreCreatorService {
     private final GenreMapper genreMapper;
 
 
-    public GenreCreatorService(JpaGenreRepository jpaGenreRepository, GenreMapper genreMapper) {
+    public GenreCreatorService(JpaGenreRepository jpaGenreRepository) {
         this.jpaGenreRepository = jpaGenreRepository;
-        this.genreMapper = genreMapper;
+        this.genreMapper = new GenreMapper();
     }
 
     public Genre create(GenreRequest genreRequest){
