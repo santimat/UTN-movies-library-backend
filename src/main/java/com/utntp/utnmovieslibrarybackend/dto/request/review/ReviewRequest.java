@@ -13,10 +13,8 @@ public class ReviewRequest {
     @NotNull
     private Long movieId;
 
-
     public ReviewRequest() {
     }
-
 
     public ReviewRequest(Integer rating, String comment, Long movieId) {
         this.rating = rating;

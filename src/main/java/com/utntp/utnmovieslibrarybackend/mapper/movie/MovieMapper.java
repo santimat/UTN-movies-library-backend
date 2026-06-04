@@ -22,6 +22,7 @@ public class MovieMapper {
     }
 
     public MovieResponse toResponse(Movie movie){
-        return new MovieResponse(movie.getId(), movie.getTitle(), movie.getDirector(), movie.getGenre().getId(), movie.getSynopsis(), movie.getYear(), movie.getPosterUrl());
+        return new MovieResponse(movie.getId(), movie.getTitle(), movie.getDirector(), movie.getGenre().getName(),
+                movie.getSynopsis(), movie.getYear(), movie.getPosterUrl());
     }
 }

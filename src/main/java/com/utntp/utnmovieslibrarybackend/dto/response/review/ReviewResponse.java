@@ -1,13 +1,11 @@
 package com.utntp.utnmovieslibrarybackend.dto.response.review;
 
-
-
 public class ReviewResponse {
     private Long id;
-    private String movieTitle;
     private Integer rating;
     private String comment;
     private Long movieId;
+    private String movieTitle;
     private String username;
 
     public ReviewResponse() {
