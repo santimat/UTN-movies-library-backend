@@ -20,6 +20,6 @@ public class ReviewMapper {
 
     public ReviewResponse toResponse(Review review){
         return new ReviewResponse(review.getId(), review.getMovie().getTitle(),review.getRating(),
-                review.getComment(), review.getMovie().getId());
+                review.getComment(), review.getMovie().getId(), review.getUser().getName());
     }
 }
