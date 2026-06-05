@@ -3,6 +3,7 @@ package com.utntp.utnmovieslibrarybackend.model.movie;
 import com.utntp.utnmovieslibrarybackend.model.genre.Genre;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
+import org.hibernate.annotations.Formula;
 
 @Entity
 @Table(name="movies")
@@ -15,7 +16,7 @@ public class Movie {
     private String title;
     @Column(nullable = false, length = 2000)
     private String synopsis;
-    @ManyToOne(fetch =  FetchType.LAZY)
+    @ManyToOne(fetch =  FetchType.LAZY, optional = false)
     @JoinColumn(name = "genre_id", nullable = false)
     private Genre genre;
     @Column(nullable = false)
@@ -25,6 +26,9 @@ public class Movie {
     private Integer year;
     @Column()
     private String posterUrl;
+    @Formula("(SELECT COALESCE(AVG(r.rating), 0.0) FROM reviews r WHERE r.movie_id = id)")
+    private Double averageRating;
+
 
     public Movie() {
     }
@@ -93,5 +97,13 @@ public class Movie {
 
     public void setPosterUrl(String posterUrl) {
         this.posterUrl = posterUrl;
+    }
+
+    public Double getAverageRating() {
+        return averageRating;
+    }
+
+    public void setAverageRating(Double averageRating) {
+        this.averageRating = averageRating;
     }
 }
