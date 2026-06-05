@@ -21,8 +21,8 @@ public class MovieMapper {
         return movie;
     }
 
-    public MovieResponse toResponse(Movie movie, Double averageRating){
+    public MovieResponse toResponse(Movie movie){
         return new MovieResponse(movie.getId(), movie.getTitle(), movie.getDirector(), movie.getGenre().getName(),
-                movie.getSynopsis(), movie.getYear(), movie.getPosterUrl(), averageRating);
+                movie.getSynopsis(), movie.getYear(), movie.getPosterUrl(), movie.getAverageRating());
     }
 }

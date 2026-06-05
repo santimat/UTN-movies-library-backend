@@ -15,21 +15,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/movies")
 public class MovieGetController {
     private final MovieFinderService movieFinderService;
-    private final ReviewAverageFinderByMovieId reviewAverageFinderByMovieId;
     private final MovieMapper movieMapper;
 
 
-    public MovieGetController(MovieFinderService movieFinderService, ReviewAverageFinderByMovieId reviewAverageFinderByMovieId) {
+    public MovieGetController(MovieFinderService movieFinderService ) {
         this.movieFinderService = movieFinderService;
-        this.reviewAverageFinderByMovieId = reviewAverageFinderByMovieId;
         this.movieMapper = new MovieMapper();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<MovieResponse> getMovieById(@PathVariable Long id){
         Movie movie = movieFinderService.find(id);
-        Double averageRating = reviewAverageFinderByMovieId.getAverageByMovieId(movie.getId());
-        MovieResponse movieResponse = movieMapper.toResponse(movie, averageRating);
+        MovieResponse movieResponse = movieMapper.toResponse(movie);
         return ResponseEntity.ok(movieResponse);
     }
 }
