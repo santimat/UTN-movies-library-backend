@@ -2,14 +2,13 @@ package com.utntp.utnmovieslibrarybackend.model.genre;
 
 import jakarta.persistence.*;
 
-
 @Entity
-@Table(name = "genres")
+@Table(name = "`genres`")
 public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     public Genre(){}
