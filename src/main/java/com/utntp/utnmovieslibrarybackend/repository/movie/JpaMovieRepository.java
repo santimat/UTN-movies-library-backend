@@ -22,7 +22,6 @@ public interface JpaMovieRepository extends JpaRepository<Movie, Long>, JpaSpeci
         OR (:searchText IS NULL OR LOWER(m.title) LIKE LOWER(CONCAT('%', CAST(:searchText AS string), '%')))
         )
     """)
-
     Page<Movie> findAllWithFilters(@Param(value = "genre") String genre, @Param(value = "searchText") String searchText,
                   Pageable pageable);
 
