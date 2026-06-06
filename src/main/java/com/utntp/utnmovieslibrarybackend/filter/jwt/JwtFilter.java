@@ -32,8 +32,9 @@ public class JwtFilter extends OncePerRequestFilter {
             return;
         }
 
-        boolean isGetMovies = request.getRequestURI().contains("/api/movies") && request.getMethod().equals("GET");
-        if(isGetMovies){
+        boolean isGetMovies = request.getRequestURI().contains("/api/movies");
+        boolean isGetGenres = request.getRequestURI().contains("/api/genres");
+        if((isGetMovies || isGetGenres) && request.getMethod().equals("GET")){
             filterChain.doFilter(request,response);
             return;
         }
