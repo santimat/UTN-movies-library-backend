@@ -32,6 +32,12 @@ public class JwtFilter extends OncePerRequestFilter {
             return;
         }
 
+        boolean isGetMovies = request.getRequestURI().contains("/api/movies") && request.getMethod().equals("GET");
+        if(isGetMovies){
+            filterChain.doFilter(request,response);
+            return;
+        }
+
         String authHeader = request.getHeader("Authorization");
         // if header is empty or it has incorrect format
         if(authHeader == null || !authHeader.startsWith("Bearer")){
