@@ -16,6 +16,6 @@ public class GenreDeleterService {
 
     public void delete(Long id){
         genreFinderService.find(id);
-        jpaGenreRepository.existsById(id);
+        jpaGenreRepository.deleteById(id);
     }
 }
