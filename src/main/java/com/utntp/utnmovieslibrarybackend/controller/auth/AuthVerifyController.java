@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/auth/me")
+@RequestMapping("/api/auth/me")
 public class AuthVerifyController {
     private final UserExistingValidatorService userExistingValidatorService;
     private final JwtService jwtService;
@@ -24,7 +24,7 @@ public class AuthVerifyController {
 
     @GetMapping
     public ResponseEntity<UserResponse> verifyAuth(@CookieValue(name = "token") String token) {
-        if (!jwtService.isTokenValid(token)) {
+        if (token == null || token.isEmpty() || !jwtService.isTokenValid(token)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         String email = jwtService.getEmail(token);
