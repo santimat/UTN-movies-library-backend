@@ -30,6 +30,6 @@ public class AuthLoginService {
             throw new WrongPasswordException();
         }
 
-        return jwtService.generateToken(user.getEmail(),user.getRole(),user.getId());
+        return jwtService.generateToken(user.getEmail(),user.getRole(),user.getId(), user.getName());
     }
 }

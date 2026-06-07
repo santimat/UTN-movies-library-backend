@@ -1,5 +1,6 @@
 package com.utntp.utnmovieslibrarybackend.service.jwt;
 
+import com.utntp.utnmovieslibrarybackend.dto.response.user.UserResponse;
 import com.utntp.utnmovieslibrarybackend.enums.UserRoleEnum;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -21,11 +22,12 @@ public class JwtService {
     private Key getKey(){
         return Keys.hmacShaKeyFor(secret.getBytes());
     }
-    public String generateToken(String email, UserRoleEnum role, Long userId){
+    public String generateToken(String email, UserRoleEnum role, Long userId, String username){
         return Jwts.builder()
                 .subject(email)
                 .claim("role", role.name())
                 .claim("userId", userId)
+                .claim("username", username)
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(getKey())
@@ -39,6 +41,8 @@ public class JwtService {
                 .parseSignedClaims(token)
                 .getPayload();
     }
+
+    public String getUsername(String token){return  getClaims(token).get("username", String.class);}
 
     public String getEmail(String token){
         return getClaims(token).getSubject();
@@ -59,5 +63,9 @@ public class JwtService {
         }catch (Exception e){
             return false;
         }
+    }
+
+    public UserResponse getUserData(String token){
+        return  new UserResponse(this.getUserId(token), this.getUsername(token), this.getEmail(token), this.getRole(token).toString());
     }
 }
