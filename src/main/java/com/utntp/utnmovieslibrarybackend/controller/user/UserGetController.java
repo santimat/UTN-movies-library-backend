@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/users")
+@RequestMapping("/api/users")
 public class UserGetController {
     private final UserMapper userMapper;
     private final UserFinderService userFinderService;
@@ -23,7 +23,7 @@ public class UserGetController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UserResponse> getUserById(@PathVariable Long id){
-        User user = userFinderService.find(id);
+        User user = userFinderService.findById(id);
         UserResponse userResponse = userMapper.toResponse(user);
         return ResponseEntity.ok(userResponse);
     }

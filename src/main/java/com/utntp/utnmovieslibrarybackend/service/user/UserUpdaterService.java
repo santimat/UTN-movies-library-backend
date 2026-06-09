@@ -16,8 +16,8 @@ public class UserUpdaterService {
         this.userFinderService = userFinderService;
     }
 
-    public User update(Long id, AuthRegisterRequest userRequest){
-        User toUpdate = userFinderService.find(id);
+    public User updateById(Long id, AuthRegisterRequest userRequest){
+        User toUpdate = userFinderService.findById(id);
         toUpdate.setEmail(userRequest.getEmail());
         toUpdate.setName(userRequest.getName());
         toUpdate.setPassword(userRequest.getPassword());

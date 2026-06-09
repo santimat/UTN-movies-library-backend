@@ -7,11 +7,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UsersSearcherService {
+public class UserSearcherService {
     private final JpaUserRepository jpaUserRepository;
 
 
-    public UsersSearcherService(JpaUserRepository jpaUserRepository) {
+    public UserSearcherService(JpaUserRepository jpaUserRepository) {
         this.jpaUserRepository = jpaUserRepository;
     }
 
