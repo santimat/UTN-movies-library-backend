@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/reviews")
+@RequestMapping("/api/reviews")
 public class ReviewGetController {
     private final ReviewFinderService reviewFinderService;
     private final ReviewMapper reviewMapper;
