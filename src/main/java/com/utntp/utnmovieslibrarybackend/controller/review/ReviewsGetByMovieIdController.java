@@ -24,9 +24,9 @@ public class ReviewsGetByMovieIdController {
     @GetMapping("/{movieId}")
     public ResponseEntity<Page<ReviewResponse>> getReviews(@RequestParam(defaultValue = "0") int page,
                                                            @RequestParam(defaultValue = "3") int size,
-                                                           @PathVariable String movieId){
+                                                           @PathVariable Long movieId){
         Pageable pageable = PageRequest.of(page, size);
-        Page<Review> reviews = reviewFinderByMovieService.findByMovieId(Long.valueOf(movieId),pageable);
+        Page<Review> reviews = reviewFinderByMovieService.findByMovieId(movieId,pageable);
         return ResponseEntity.ok(
                 reviews.map(
                         reviewMapper::toResponse
