@@ -26,7 +26,7 @@ public class MovieRequest {
     public MovieRequest() {
     }
     public MovieRequest( String title, String director, String genre, String synopsis, Integer year,
-                         @Nullable String posterUrl, Double duration, String trailerUrl) {
+                         @Nullable String posterUrl, Double duration, @Nullable String trailerUrl) {
         this.title = title;
         this.director = director;
         this.genre = genre;
