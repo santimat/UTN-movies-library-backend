@@ -1,32 +1,48 @@
 package com.utntp.utnmovieslibrarybackend.dto.request.movie;
 
 import jakarta.annotation.Nullable;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public class MovieRequest {
 
     @NotBlank
+    @Min(value = 5, message = "Title must be at least 5 characters long")
+    @Max(value = 100, message = "Title must be at most 100 characters long")
     private String title;
     @NotBlank
+    @Min(value = 5, message = "Director must be at least 5 characters long")
+    @Max(value = 100, message = "Director must be at most 100 characters long")
     private String director;
     @NotBlank
+    @Min(value = 5, message = "Genre must be at least 5 characters long")
+    @Max(value = 100, message = "Genre must be at most 100 characters long")
     private String genre;
     @NotBlank
+    @Min(value = 5, message = "Synopsis must be at least 5 characters long")
+    @Max(value = 300, message = "Synopsis must be at most 100 characters long")
     private String synopsis;
     @NotNull
+    @Min(value = 1888, message = "Year must be greater than or equal to 1888")
+    @Max(value = 2100, message = "Year must be less than or equal to 2100")
     private Integer year;
     @Nullable
+    @Min(value = 5, message = "Poster URL must be at least 5 characters long")
     private String posterUrl;
     @NotNull
+    @Min(value = 1, message = "Duration must be greater than 1 or equal to 1 minute")
     private Double duration;
     @Nullable
+    @Min(value = 5, message = "Trailer URL must be at least 5 characters long")
     private String trailerUrl;
 
     public MovieRequest() {
     }
-    public MovieRequest( String title, String director, String genre, String synopsis, Integer year,
-                         @Nullable String posterUrl, Double duration, @Nullable String trailerUrl) {
+
+    public MovieRequest(String title, String director, String genre, String synopsis, Integer year,
+                        @Nullable String posterUrl, Double duration, @Nullable String trailerUrl) {
         this.title = title;
         this.director = director;
         this.genre = genre;
