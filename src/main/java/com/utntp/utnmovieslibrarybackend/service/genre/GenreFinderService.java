@@ -14,7 +14,7 @@ public class GenreFinderService {
         this.jpaGenreRepository = jpaGenreRepository;
     }
 
-    public Genre find(Long id){
+    public Genre findById(Long id) {
         return jpaGenreRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Genre with id: " + id + " not found"));
     }

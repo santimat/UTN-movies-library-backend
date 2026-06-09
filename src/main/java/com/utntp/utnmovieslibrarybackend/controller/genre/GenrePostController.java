@@ -8,6 +8,7 @@ import com.utntp.utnmovieslibrarybackend.service.genre.GenreCreatorService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,8 @@ public class GenrePostController {
     }
 
     @PostMapping
-    public ResponseEntity<GenreResponse> createGenre(@Valid @RequestBody GenreRequest genreRequest){
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<GenreResponse> createGenre(@Valid @RequestBody GenreRequest genreRequest) {
         Genre genre = genreCreatorService.create(genreRequest);
         GenreResponse genreResponse = genreMapper.toResponse(genre);
         return ResponseEntity.status(HttpStatus.CREATED).body(genreResponse);

@@ -16,8 +16,8 @@ public class GenreUpdaterService {
         this.genreFinderService = genreFinderService;
     }
 
-    public Genre update(Long id, GenreRequest genreRequest){
-        Genre toUpdate = genreFinderService.find(id);
+    public Genre update(Long id, GenreRequest genreRequest) {
+        Genre toUpdate = genreFinderService.findById(id);
         toUpdate.setName(genreRequest.getName());
         return jpaGenreRepository.save(toUpdate);
     }

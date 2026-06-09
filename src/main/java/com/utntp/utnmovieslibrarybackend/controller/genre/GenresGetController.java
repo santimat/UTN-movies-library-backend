@@ -19,7 +19,6 @@ public class GenresGetController {
     private final GenresSearcherService genresSearcherService;
     private final GenreMapper genreMapper;
 
-
     public GenresGetController(GenresSearcherService genresSearcherService) {
         this.genresSearcherService = genresSearcherService;
         this.genreMapper = new GenreMapper();
@@ -27,9 +26,9 @@ public class GenresGetController {
 
     @GetMapping
     public ResponseEntity<Page<GenreResponse>> getGenres(@RequestParam(defaultValue = "0") int page,
-                                                         @RequestParam(defaultValue = "5") int size){
+                                                         @RequestParam(defaultValue = "5") int size) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<Genre> genres = genresSearcherService.getAll(pageable);
+        Page<Genre> genres = genresSearcherService.findAll(pageable);
         return ResponseEntity.ok(
                 genres.map(
                         genreMapper::toResponse

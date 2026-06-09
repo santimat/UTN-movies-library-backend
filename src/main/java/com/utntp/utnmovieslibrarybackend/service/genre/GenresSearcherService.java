@@ -15,7 +15,7 @@ public class GenresSearcherService {
         this.jpaGenreRepository = jpaGenreRepository;
     }
 
-    public Page<Genre> getAll(Pageable pageable){
+    public Page<Genre> findAll(Pageable pageable) {
         return jpaGenreRepository.findAll(pageable);
     }
 }
