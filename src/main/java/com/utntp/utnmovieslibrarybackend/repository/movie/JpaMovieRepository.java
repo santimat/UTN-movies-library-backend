@@ -1,6 +1,7 @@
 package com.utntp.utnmovieslibrarybackend.repository.movie;
 
 import com.utntp.utnmovieslibrarybackend.model.movie.Movie;
+import org.jspecify.annotations.NonNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,5 +25,7 @@ public interface JpaMovieRepository extends JpaRepository<Movie, Long>, JpaSpeci
     """)
     Page<Movie> findAllWithFilters(@Param(value = "genre") String genre, @Param(value = "searchText") String searchText,
                   Pageable pageable);
+
+    boolean existsById(@NonNull Long id);
 
 }
