@@ -7,6 +7,7 @@ import com.utntp.utnmovieslibrarybackend.model.review.Review;
 import com.utntp.utnmovieslibrarybackend.service.review.ReviewUpdaterService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,6 +23,7 @@ public class ReviewPutController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     public ResponseEntity<ReviewResponse> updateReviewById(@PathVariable Long id,
                                               @Valid @RequestBody ReviewRequest reviewRequest){
         Review review = reviewUpdaterService.updateById(id, reviewRequest);
