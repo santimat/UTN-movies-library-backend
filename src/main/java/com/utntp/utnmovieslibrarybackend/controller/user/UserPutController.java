@@ -7,6 +7,7 @@ import com.utntp.utnmovieslibrarybackend.model.user.User;
 import com.utntp.utnmovieslibrarybackend.service.user.UserUpdaterService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,6 +23,7 @@ public class UserPutController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     public ResponseEntity<UserResponse> updateUserById(@PathVariable Long id,
                                             @Valid @RequestBody AuthRegisterRequest userRequest){
         User user = userUpdaterService.updateById(id, userRequest);

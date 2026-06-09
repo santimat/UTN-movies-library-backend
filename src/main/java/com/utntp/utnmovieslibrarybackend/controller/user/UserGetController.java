@@ -5,6 +5,7 @@ import com.utntp.utnmovieslibrarybackend.mapper.user.UserMapper;
 import com.utntp.utnmovieslibrarybackend.model.user.User;
 import com.utntp.utnmovieslibrarybackend.service.user.UserFinderService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,8 @@ public class UserGetController {
     }
 
     @GetMapping("/{id}")
+    // spring reads #id from PathVariable and authentication is filled with UserPrincipal injected in SecurityContext
+    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     public ResponseEntity<UserResponse> getUserById(@PathVariable Long id){
         User user = userFinderService.findById(id);
         UserResponse userResponse = userMapper.toResponse(user);
