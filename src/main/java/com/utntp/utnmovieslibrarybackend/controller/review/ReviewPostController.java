@@ -4,7 +4,6 @@ import com.utntp.utnmovieslibrarybackend.dto.request.review.ReviewRequest;
 import com.utntp.utnmovieslibrarybackend.dto.response.review.ReviewResponse;
 import com.utntp.utnmovieslibrarybackend.mapper.review.ReviewMapper;
 import com.utntp.utnmovieslibrarybackend.model.review.Review;
-import com.utntp.utnmovieslibrarybackend.security.JwtService;
 import com.utntp.utnmovieslibrarybackend.security.UserPrincipal;
 import com.utntp.utnmovieslibrarybackend.service.review.ReviewCreatorService;
 import jakarta.validation.Valid;
@@ -18,12 +17,10 @@ import org.springframework.web.bind.annotation.*;
 public class ReviewPostController {
     private final ReviewCreatorService reviewCreatorService;
     private final ReviewMapper reviewMapper;
-    private final JwtService jwtService;
 
-    public ReviewPostController(ReviewCreatorService reviewCreatorService, JwtService jwtService) {
+    public ReviewPostController(ReviewCreatorService reviewCreatorService) {
         this.reviewCreatorService = reviewCreatorService;
         this.reviewMapper = new ReviewMapper();
-        this.jwtService = jwtService;
     }
 
     @PostMapping

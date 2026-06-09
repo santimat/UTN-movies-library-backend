@@ -8,8 +8,6 @@ import com.utntp.utnmovieslibrarybackend.model.review.Review;
 import com.utntp.utnmovieslibrarybackend.model.user.User;
 import com.utntp.utnmovieslibrarybackend.repository.movie.JpaMovieRepository;
 import com.utntp.utnmovieslibrarybackend.repository.review.JpaReviewRepository;
-import com.utntp.utnmovieslibrarybackend.service.movie.MovieFinderService;
-import com.utntp.utnmovieslibrarybackend.service.user.UserFinderService;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Service;
 
