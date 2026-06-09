@@ -2,12 +2,10 @@ package com.utntp.utnmovieslibrarybackend.controller.auth;
 
 import com.utntp.utnmovieslibrarybackend.dto.request.auth.AuthLoginRequest;
 import com.utntp.utnmovieslibrarybackend.dto.response.user.UserResponse;
-import com.utntp.utnmovieslibrarybackend.exception.WrongPasswordException;
 import com.utntp.utnmovieslibrarybackend.service.auth.AuthLoginService;
 import com.utntp.utnmovieslibrarybackend.security.JwtService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
