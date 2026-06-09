@@ -1,9 +1,9 @@
-package com.utntp.utnmovieslibrarybackend.dto.request.user;
+package com.utntp.utnmovieslibrarybackend.dto.request.auth;
 
 
 import jakarta.validation.constraints.NotBlank;
 
-public class UserRequest {
+public class AuthRegisterRequest {
     @NotBlank
     private String name;
     @NotBlank
@@ -11,10 +11,10 @@ public class UserRequest {
     @NotBlank
     private String password;
 
-    public UserRequest() {
+    public AuthRegisterRequest() {
     }
 
-    public UserRequest(String name, String email, String password) {
+    public AuthRegisterRequest(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;
