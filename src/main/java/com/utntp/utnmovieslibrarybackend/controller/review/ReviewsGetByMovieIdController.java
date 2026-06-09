@@ -4,7 +4,6 @@ import com.utntp.utnmovieslibrarybackend.dto.response.review.ReviewResponse;
 import com.utntp.utnmovieslibrarybackend.mapper.review.ReviewMapper;
 import com.utntp.utnmovieslibrarybackend.model.review.Review;
 import com.utntp.utnmovieslibrarybackend.service.review.ReviewFinderByMovieService;
-import com.utntp.utnmovieslibrarybackend.service.review.ReviewsSearcherService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
