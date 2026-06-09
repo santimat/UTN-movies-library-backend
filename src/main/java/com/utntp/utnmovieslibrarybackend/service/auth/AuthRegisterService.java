@@ -1,6 +1,7 @@
 package com.utntp.utnmovieslibrarybackend.service.auth;
 
 import com.utntp.utnmovieslibrarybackend.dto.request.auth.AuthRegisterRequest;
+import com.utntp.utnmovieslibrarybackend.exception.DuplicateResourceException;
 import com.utntp.utnmovieslibrarybackend.mapper.user.UserMapper;
 import com.utntp.utnmovieslibrarybackend.model.user.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,6 +21,8 @@ public class AuthRegisterService {
     }
 
     public User register(AuthRegisterRequest request){
+        if(jpaUserRepository.existsByEmail(request.getEmail())) throw new DuplicateResourceException("User with email" + request.getEmail() + " already exists");
+
         User user = userMapper.toEntity(request);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         return jpaUserRepository.save(user);

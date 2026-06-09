@@ -1,11 +1,11 @@
 package com.utntp.utnmovieslibrarybackend.service.auth;
 
 import com.utntp.utnmovieslibrarybackend.dto.request.auth.AuthLoginRequest;
-import com.utntp.utnmovieslibrarybackend.exception.auth.WrongPasswordException;
-import com.utntp.utnmovieslibrarybackend.exception.user.UserNotFoundByEmailException;
+import com.utntp.utnmovieslibrarybackend.exception.ResourceNotFoundException;
+import com.utntp.utnmovieslibrarybackend.exception.WrongPasswordException;
 import com.utntp.utnmovieslibrarybackend.model.user.User;
 import com.utntp.utnmovieslibrarybackend.repository.user.JpaUserRepository;
-import com.utntp.utnmovieslibrarybackend.service.jwt.JwtService;
+import com.utntp.utnmovieslibrarybackend.security.JwtService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ public class AuthLoginService {
 
     public String login(AuthLoginRequest loginRequest){
         User user = jpaUserRepository.findByEmail(loginRequest.getEmail())
-                .orElseThrow(() -> new UserNotFoundByEmailException(loginRequest.getEmail()));
+                .orElseThrow(() -> new ResourceNotFoundException("User with email " + loginRequest.getEmail() + " not found"));
 
         if(!passwordEncoder.matches(loginRequest.getPassword(),user.getPassword())){
             throw new WrongPasswordException();
