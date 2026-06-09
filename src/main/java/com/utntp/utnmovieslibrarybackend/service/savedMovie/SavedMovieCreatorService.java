@@ -1,5 +1,6 @@
 package com.utntp.utnmovieslibrarybackend.service.savedMovie;
 
+import com.utntp.utnmovieslibrarybackend.dto.request.savedmovie.SavedMovieRequest;
 import com.utntp.utnmovieslibrarybackend.exception.ResourceNotFoundException;
 import com.utntp.utnmovieslibrarybackend.model.movie.Movie;
 import com.utntp.utnmovieslibrarybackend.model.savedMovie.SavedMovie;
