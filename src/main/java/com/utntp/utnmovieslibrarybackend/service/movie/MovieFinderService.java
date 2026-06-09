@@ -1,6 +1,6 @@
 package com.utntp.utnmovieslibrarybackend.service.movie;
 
-import com.utntp.utnmovieslibrarybackend.exception.movie.MovieNotFoundException;
+import com.utntp.utnmovieslibrarybackend.exception.ResourceNotFoundException;
 import com.utntp.utnmovieslibrarybackend.model.movie.Movie;
 import com.utntp.utnmovieslibrarybackend.repository.movie.JpaMovieRepository;
 import org.springframework.stereotype.Service;
@@ -14,8 +14,8 @@ public class MovieFinderService {
         this.jpaMovieRepository = jpaMovieRepository;
     }
 
-    public Movie find(Long id){
+    public Movie findById(Long id){
         return jpaMovieRepository.findById(id)
-                .orElseThrow(()-> new MovieNotFoundException(id));
+                .orElseThrow(()-> new ResourceNotFoundException("Movie with id " + id + " not found"));
     }
 }
