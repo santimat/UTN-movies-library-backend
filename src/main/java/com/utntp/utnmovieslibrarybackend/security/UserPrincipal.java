@@ -1,7 +1,6 @@
 package com.utntp.utnmovieslibrarybackend.security;
 import com.utntp.utnmovieslibrarybackend.enums.UserRoleEnum;
 
-import jakarta.validation.constraints.NotNull;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
