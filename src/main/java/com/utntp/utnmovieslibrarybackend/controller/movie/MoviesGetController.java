@@ -15,11 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/movies")
+@RequestMapping("/api/movies")
 public class MoviesGetController {
     private final MoviesSearcherService moviesSearcherService;
     private final MovieMapper movieMapper;
-
 
     public MoviesGetController(MoviesSearcherService moviesSearcherService) {
         this.moviesSearcherService = moviesSearcherService;
@@ -28,16 +27,15 @@ public class MoviesGetController {
 
     @GetMapping
     public ResponseEntity<Page<MovieResponse>> getMovies(@RequestParam(defaultValue = "0") int page,
-                                                      @RequestParam(defaultValue = "5") int size,
+                                                         @RequestParam(defaultValue = "5") int size,
                                                          @RequestParam(defaultValue = "title") String sortBy,
                                                          @RequestParam(defaultValue = "ASC") String sortOrder,
                                                          @RequestParam(required = false) String genre,
-                                                         @RequestParam(required = false) String searchText){
-
+                                                         @RequestParam(required = false) String searchText) {
         Sort.Direction sortDirection = Sort.Direction.fromString(sortOrder);
         Sort sortConfig = Sort.by(sortDirection, sortBy);
         Pageable pageable = PageRequest.of(page, size, sortConfig);
-        Page<Movie> movies = moviesSearcherService.findAll(pageable,genre,
+        Page<Movie> movies = moviesSearcherService.findAll(pageable, genre,
                 searchText);
 
         return ResponseEntity.ok(

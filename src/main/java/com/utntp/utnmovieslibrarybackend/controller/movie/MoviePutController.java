@@ -7,10 +7,11 @@ import com.utntp.utnmovieslibrarybackend.model.movie.Movie;
 import com.utntp.utnmovieslibrarybackend.service.movie.MovieUpdaterService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/movies")
+@RequestMapping("/api/movies")
 public class MoviePutController {
     private final MovieUpdaterService movieUpdaterService;
     private final MovieMapper movieMapper;
@@ -22,6 +23,7 @@ public class MoviePutController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<MovieResponse> updateMovieById(@PathVariable Long id,
                                              @Valid @RequestBody MovieRequest movieRequest){
         Movie movie = movieUpdaterService.update(id, movieRequest);

@@ -14,8 +14,8 @@ public class MovieDeleterService {
         this.movieFinderService = movieFinderService;
     }
 
-    public void deleter(Long id){
-        movieFinderService.find(id);
+    public void deleteById(Long id){
+        movieFinderService.findById(id);
         jpaMovieRepository.deleteById(id);
     }
 }

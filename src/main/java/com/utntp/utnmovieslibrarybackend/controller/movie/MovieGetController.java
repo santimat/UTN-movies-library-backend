@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/movies")
+@RequestMapping("/api/movies")
 public class MovieGetController {
     private final MovieFinderService movieFinderService;
     private final MovieMapper movieMapper;
-
 
     public MovieGetController(MovieFinderService movieFinderService ) {
         this.movieFinderService = movieFinderService;
@@ -24,7 +23,7 @@ public class MovieGetController {
 
     @GetMapping("/{id}")
     public ResponseEntity<MovieResponse> getMovieById(@PathVariable Long id){
-        Movie movie = movieFinderService.find(id);
+        Movie movie = movieFinderService.findById(id);
         MovieResponse movieResponse = movieMapper.toResponse(movie);
         return ResponseEntity.ok(movieResponse);
     }

@@ -15,8 +15,6 @@ public class MovieUpdaterService {
     private final MovieFinderService movieFinderService;
     private final JpaGenreRepository jpaGenreRepository;
 
-
-
     public MovieUpdaterService(JpaMovieRepository jpaMovieRepository, MovieFinderService movieFinderService, JpaGenreRepository jpaGenreRepository) {
         this.jpaMovieRepository = jpaMovieRepository;
         this.movieFinderService = movieFinderService;
@@ -25,7 +23,7 @@ public class MovieUpdaterService {
 
     public Movie update(Long id, MovieRequest movieRequest){
         Optional<Genre> existsGenre = jpaGenreRepository.findByName(movieRequest.getGenre());
-        Movie toUpdate = movieFinderService.find(id);
+        Movie toUpdate = movieFinderService.findById(id);
         if(existsGenre.isPresent()) toUpdate.setGenre(existsGenre.get());
         else{
             Genre newGenre = new Genre();

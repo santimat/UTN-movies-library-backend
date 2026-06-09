@@ -22,11 +22,12 @@ public class MovieReviewsGetController {
     }
 
     @GetMapping("/{movieId}/reviews")
-    public ResponseEntity<Page<ReviewResponse>> getReviewsByMovieId(@PathVariable Long movieId,
-                                              @RequestParam(defaultValue = "0") int page,
-                                              @RequestParam(defaultValue = "5") int size){
-        Pageable pageable = PageRequest.of(page,size);
-        Page<Review> reviews = reviewFinderByMovieService.getByMovieId(movieId, pageable);
+    public ResponseEntity<Page<ReviewResponse>> getReviewsByMovieId
+            (@RequestParam(defaultValue = "0") int page,
+             @RequestParam(defaultValue = "5") int size,
+             @PathVariable Long movieId) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Review> reviews = reviewFinderByMovieService.findByMovieId(movieId, pageable);
         return ResponseEntity.ok(reviews.map(reviewMapper::toResponse));
     }
 }
