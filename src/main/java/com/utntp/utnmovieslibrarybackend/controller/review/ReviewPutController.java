@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/reviews")
+@RequestMapping("/api/reviews")
 public class ReviewPutController {
     private final ReviewUpdaterService reviewUpdaterService;
     private final ReviewMapper reviewMapper;
@@ -24,7 +24,7 @@ public class ReviewPutController {
     @PutMapping("/{id}")
     public ResponseEntity<ReviewResponse> updateReviewById(@PathVariable Long id,
                                               @Valid @RequestBody ReviewRequest reviewRequest){
-        Review review = reviewUpdaterService.update(id, reviewRequest);
+        Review review = reviewUpdaterService.updateById(id, reviewRequest);
         ReviewResponse reviewResponse = reviewMapper.toResponse(review);
         return ResponseEntity.ok(reviewResponse);
     }

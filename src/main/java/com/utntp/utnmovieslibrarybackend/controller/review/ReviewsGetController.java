@@ -14,11 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/reviews")
+@RequestMapping("/api/reviews")
 public class ReviewsGetController {
     private final ReviewsSearcherService reviewsSearcherService;
     private final ReviewMapper reviewMapper;
-
 
     public ReviewsGetController(ReviewsSearcherService reviewsSearcherService) {
         this.reviewsSearcherService = reviewsSearcherService;
@@ -31,9 +30,7 @@ public class ReviewsGetController {
         Pageable pageable = PageRequest.of(page, size);
         Page<Review> reviews = reviewsSearcherService.findAll(pageable);
         return ResponseEntity.ok(
-                reviews.map(
-                        reviewMapper::toResponse
-        )
+                reviews.map(reviewMapper::toResponse)
         );
     }
 }

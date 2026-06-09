@@ -14,7 +14,7 @@ public class ReviewFinderByMovieService {
         this.jpaReviewRepository = jpaReviewRepository;
     }
 
-    public Page<Review> getByMovieId(Long movieId, Pageable pageable){
+    public Page<Review> findByMovieId(Long movieId, Pageable pageable){
         return jpaReviewRepository.findByMovieId(movieId, pageable);
     }
 }

@@ -27,8 +27,8 @@ public class ReviewCreatorService {
     }
 
     public Review create(ReviewRequest reviewRequest, Long userId){
-        Movie movie = movieFinderService.find(reviewRequest.getMovieId());
-        User user = userFinderService.find(userId);
+        Movie movie = movieFinderService.findById(reviewRequest.getMovieId());
+        User user = userFinderService.findById(userId);
         Review review = reviewMapper.toEntity(reviewRequest, movie);
         review.setUser(user);
         return jpaReviewRepository.save(review);

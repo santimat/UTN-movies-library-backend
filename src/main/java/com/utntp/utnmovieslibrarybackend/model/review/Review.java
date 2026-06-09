@@ -15,7 +15,7 @@ public class Review {
 
     @Column(nullable = false)
     @Min(1) @Max(5)
-    private Integer rating;
+    private Double rating;
     @Column(nullable = false, length = 1000)
     private String comment;
     // FetchType.LAZY prevents that JPA loads the whole asociated data for each query
@@ -29,7 +29,7 @@ public class Review {
     public Review() {
     }
 
-    public Review(Long id, Integer rating, String comment, User user, Movie movie) {
+    public Review(Long id, Double rating, String comment, User user, Movie movie) {
         this.id = id;
         this.rating = rating;
         this.comment = comment;
@@ -45,11 +45,11 @@ public class Review {
         this.id = id;
     }
 
-    public Integer getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 

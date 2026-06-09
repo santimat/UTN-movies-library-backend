@@ -16,8 +16,8 @@ public class ReviewUpdaterService {
         this.reviewFinderService = reviewFinderService;
     }
 
-    public Review update(Long id, ReviewRequest reviewRequest){
-        Review review = reviewFinderService.find(id);
+    public Review updateById(Long id, ReviewRequest reviewRequest){
+        Review review = reviewFinderService.findById(id);
         review.setRating(reviewRequest.getRating());
         review.setComment(reviewRequest.getComment());
         return jpaReviewRepository.save(review);

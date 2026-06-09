@@ -26,7 +26,7 @@ public class ReviewsGetByMovieIdController {
                                                            @RequestParam(defaultValue = "3") int size,
                                                            @PathVariable String movieId){
         Pageable pageable = PageRequest.of(page, size);
-        Page<Review> reviews = reviewFinderByMovieService.getByMovieId(Long.valueOf(movieId),pageable);
+        Page<Review> reviews = reviewFinderByMovieService.findByMovieId(Long.valueOf(movieId),pageable);
         return ResponseEntity.ok(
                 reviews.map(
                         reviewMapper::toResponse

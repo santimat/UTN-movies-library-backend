@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 public class ReviewRequest {
 
     @NotNull
-    private Integer rating;
+    private Double rating;
     @NotBlank
     private String comment;
     @NotNull
@@ -16,17 +16,17 @@ public class ReviewRequest {
     public ReviewRequest() {
     }
 
-    public ReviewRequest(Integer rating, String comment, Long movieId) {
+    public ReviewRequest(Double rating, String comment, Long movieId) {
         this.rating = rating;
         this.comment = comment;
         this.movieId = movieId;
     }
 
-    public Integer getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 
