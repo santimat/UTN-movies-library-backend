@@ -14,7 +14,7 @@ public class ReviewDeleterService {
         this.reviewFinderService = reviewFinderService;
     }
 
-    public void deleter(Long id){
+    public void deleteById(Long id){
         reviewFinderService.findById(id);
         jpaReviewRepository.deleteById(id);
     }
