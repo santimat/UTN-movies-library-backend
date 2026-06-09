@@ -2,10 +2,9 @@ package com.utntp.utnmovieslibrarybackend.controller.auth;
 
 import com.utntp.utnmovieslibrarybackend.dto.request.auth.AuthLoginRequest;
 import com.utntp.utnmovieslibrarybackend.dto.response.user.UserResponse;
-import com.utntp.utnmovieslibrarybackend.exception.auth.WrongPasswordException;
-import com.utntp.utnmovieslibrarybackend.exception.user.UserNotFoundByEmailException;
+import com.utntp.utnmovieslibrarybackend.exception.WrongPasswordException;
 import com.utntp.utnmovieslibrarybackend.service.auth.AuthLoginService;
-import com.utntp.utnmovieslibrarybackend.service.jwt.JwtService;
+import com.utntp.utnmovieslibrarybackend.security.JwtService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
@@ -29,28 +28,16 @@ public class AuthLoginController {
     @PostMapping()
     public ResponseEntity<UserResponse> login(@RequestBody AuthLoginRequest loginRequest,
                                               HttpServletResponse response) {
-        try{
             String token = authLoginService.login(loginRequest);
             Cookie cookie = new Cookie("token", token);
             cookie.setHttpOnly(true);
             cookie.setSecure(false);
             cookie.setPath("/");
-
             if(loginRequest.isRemember()) cookie.setMaxAge(86400);
-
             response.addCookie(cookie);
 
-            UserResponse userResponse = jwtService.getUserData(token);
-
+            UserResponse userResponse = jwtService.getUserResponse(token);
             return ResponseEntity.ok(userResponse);
-        }catch (WrongPasswordException e){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }catch (UserNotFoundByEmailException e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
     }
 
 }
