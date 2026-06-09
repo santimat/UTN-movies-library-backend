@@ -1,21 +1,15 @@
 package com.utntp.utnmovieslibrarybackend.dto.request.auth;
-
-
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 
 public class AuthRegisterRequest {
     @NotBlank
-    @Min(value = 3, message = "Name should be at least 2 characters")
-    @Max(value = 50, message = "Name should be at most 50 characters")
+    @Size(min = 3, max = 50, message = "Name should be between 3 and 50 characters")
     private String name;
     @NotBlank
     @Email(message = "Email should be valid")
     private String email;
     @NotBlank
-    @Min(value = 6, message = "Password should be at least 6 characters")
+    @Size(min = 6, max = 100, message = "Password should be between 6 and 100 characters")
     private String password;
 
     public AuthRegisterRequest() {

@@ -2,10 +2,11 @@ package com.utntp.utnmovieslibrarybackend.dto.request.genre;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 public class GenreRequest {
     @NotBlank
-    @Min(value = 3, message = "Genre name must be at least 3 characters long")
+    @Size(min = 3, max = 50, message = "Genre name must be between 3 and 50 characters")
     private String name;
 
     public GenreRequest() {

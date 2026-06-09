@@ -2,11 +2,13 @@ package com.utntp.utnmovieslibrarybackend.dto.request.auth;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 
 public class AuthLoginRequest {
+    @Size(min = 6)
     @Email(message = "Email should be valid")
     private String email;
-    @Min(value = 6, message = "Password should be at least 6 characters")
+    @Size(min = 6, max = 100, message = "Password should be between 6 and 100 characters")
     private String password;
     private boolean remember;
 
