@@ -1,5 +1,6 @@
 package com.utntp.utnmovieslibrarybackend.security;
 
+import com.utntp.utnmovieslibrarybackend.dto.response.user.UserResponse;
 import com.utntp.utnmovieslibrarybackend.enums.UserRoleEnum;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -42,19 +43,25 @@ public class JwtService {
     }
 
     public String getUsername(String token){return  getClaims(token).get("username", String.class);}
-
     public String getEmail(String token){
         return getClaims(token).getSubject();
     }
-
     public UserRoleEnum getRole(String token){
         String role = getClaims(token).get("role", String.class);
         return UserRoleEnum.valueOf(role);
     }
-
     public Long getUserId(String token){
         return getClaims(token).get("userId",Long.class);
     }
+
+    public UserResponse getUserResponse(String token){
+        Long userId = getUserId(token);
+        String username = getUsername(token);
+        String email = getEmail(token);
+        String role = getRole(token).name();
+        return new UserResponse(userId, username, email, role);
+    }
+
 
     public boolean isTokenValid(String token){
         try{
