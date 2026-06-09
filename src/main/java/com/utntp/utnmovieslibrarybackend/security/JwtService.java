@@ -1,6 +1,5 @@
 package com.utntp.utnmovieslibrarybackend.security;
 
-import com.utntp.utnmovieslibrarybackend.dto.response.user.UserResponse;
 import com.utntp.utnmovieslibrarybackend.enums.UserRoleEnum;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
