@@ -18,11 +18,13 @@ public class MovieMapper {
         movie.setSynopsis(request.getSynopsis());
         movie.setYear(request.getYear());
         movie.setPosterUrl(request.getPosterUrl());
+        movie.setDuration(request.getDuration());
         return movie;
     }
 
     public MovieResponse toResponse(Movie movie){
         return new MovieResponse(movie.getId(), movie.getTitle(), movie.getDirector(), movie.getGenre().getName(),
-                movie.getSynopsis(), movie.getYear(), movie.getPosterUrl(), movie.getAverageRating());
+                movie.getSynopsis(), movie.getYear(), movie.getPosterUrl(), movie.getAverageRating(),
+                movie.getDuration(),movie.getTrailerUrl());
     }
 }

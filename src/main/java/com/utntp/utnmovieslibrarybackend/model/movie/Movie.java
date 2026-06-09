@@ -28,12 +28,16 @@ public class Movie {
     private String posterUrl;
     @Formula("(SELECT COALESCE(AVG(r.rating), 0.0) FROM reviews r WHERE r.movie_id = id)")
     private Double averageRating;
-
+    @Column()
+    private Double duration;
+    @Column()
+    private String trailerUrl;
 
     public Movie() {
     }
 
-    public Movie(Long id, String title, String synopsis, Genre genre, String director, Integer year, String posterUrl) {
+    public Movie(Long id, String title, String synopsis, Genre genre, String director, Integer year, String posterUrl
+            , Double duration, String trailerUrl) {
         this.id = id;
         this.title = title;
         this.synopsis = synopsis;
@@ -41,6 +45,8 @@ public class Movie {
         this.director = director;
         this.year = year;
         this.posterUrl = posterUrl;
+        this.duration = duration;
+        this.trailerUrl = trailerUrl;
     }
 
     public Long getId() {
@@ -105,5 +111,21 @@ public class Movie {
 
     public void setAverageRating(Double averageRating) {
         this.averageRating = averageRating;
+    }
+
+    public Double getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Double duration) {
+        this.duration = duration;
+    }
+
+    public String getTrailerUrl() {
+        return trailerUrl;
+    }
+
+    public void setTrailerUrl(String trailerUrl) {
+        this.trailerUrl = trailerUrl;
     }
 }

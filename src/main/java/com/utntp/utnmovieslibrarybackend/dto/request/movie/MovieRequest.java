@@ -18,16 +18,23 @@ public class MovieRequest {
     private Integer year;
     @Nullable
     private String posterUrl;
+    @NotNull
+    private Double duration;
+    @Nullable
+    private String trailerUrl;
 
     public MovieRequest() {
     }
-    public MovieRequest( String title, String director, String genre, String synopsis, Integer year, @Nullable String posterUrl) {
+    public MovieRequest( String title, String director, String genre, String synopsis, Integer year,
+                         @Nullable String posterUrl, Double duration, String trailerUrl) {
         this.title = title;
         this.director = director;
         this.genre = genre;
         this.synopsis = synopsis;
         this.year = year;
         this.posterUrl = posterUrl;
+        this.trailerUrl = trailerUrl;
+        this.duration = duration;
     }
 
 
@@ -78,5 +85,22 @@ public class MovieRequest {
 
     public void setPosterUrl(@Nullable String posterUrl) {
         this.posterUrl = posterUrl;
+    }
+
+    public Double getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Double duration) {
+        this.duration = duration;
+    }
+
+    @Nullable
+    public String getTrailerUrl() {
+        return trailerUrl;
+    }
+
+    public void setTrailerUrl(@Nullable String trailerUrl) {
+        this.trailerUrl = trailerUrl;
     }
 }

@@ -19,12 +19,17 @@ public class MovieResponse {
     private Integer year;
     @Nullable
     private String posterUrl;
+    @NotNull
     private Double averageRating;
+    @NotNull
+    private Double duration;
+    @Nullable
+    private String trailerUrl;
     public MovieResponse() {
     }
 
     public MovieResponse(Long id, String title, String director, String genre, String synopsis, Integer year,
-                         @Nullable String posterUrl, Double averageRating) {
+                         @Nullable String posterUrl, Double averageRating, Double duration, String trailerUrl) {
         this.id = id;
         this.title = title;
         this.director = director;
@@ -32,7 +37,9 @@ public class MovieResponse {
         this.synopsis = synopsis;
         this.year = year;
         this.posterUrl = posterUrl;
+        this.trailerUrl = trailerUrl;
         this.averageRating = averageRating;
+        this.duration = duration;
     }
 
     public Long getId() {
@@ -98,5 +105,21 @@ public class MovieResponse {
 
     public void setAverageRating(Double averageRating) {
         this.averageRating = averageRating;
+    }
+
+    public Double getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Double duration) {
+        this.duration = duration;
+    }
+
+    public String getTrailerUrl() {
+        return trailerUrl;
+    }
+
+    public void setTrailerUrl(String trailerUrl) {
+        this.trailerUrl = trailerUrl;
     }
 }
