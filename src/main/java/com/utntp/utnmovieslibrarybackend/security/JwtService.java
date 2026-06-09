@@ -1,4 +1,4 @@
-package com.utntp.utnmovieslibrarybackend.service.jwt;
+package com.utntp.utnmovieslibrarybackend.security;
 
 import com.utntp.utnmovieslibrarybackend.dto.response.user.UserResponse;
 import com.utntp.utnmovieslibrarybackend.enums.UserRoleEnum;
@@ -64,9 +64,5 @@ public class JwtService {
         }catch (Exception e){
             return false;
         }
-    }
-
-    public UserResponse getUserData(String token){
-        return new UserResponse(this.getUserId(token), this.getUsername(token), this.getEmail(token), this.getRole(token).toString());
     }
 }
