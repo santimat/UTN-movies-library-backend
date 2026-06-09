@@ -49,7 +49,8 @@ public class JwtService {
     }
 
     public UserRoleEnum getRole(String token){
-        return getClaims(token).get("role", UserRoleEnum.class);
+        String role = getClaims(token).get("role", String.class);
+        return UserRoleEnum.valueOf(role);
     }
 
     public Long getUserId(String token){
@@ -66,6 +67,6 @@ public class JwtService {
     }
 
     public UserResponse getUserData(String token){
-        return  new UserResponse(this.getUserId(token), this.getUsername(token), this.getEmail(token), this.getRole(token).toString());
+        return new UserResponse(this.getUserId(token), this.getUsername(token), this.getEmail(token), this.getRole(token).toString());
     }
 }

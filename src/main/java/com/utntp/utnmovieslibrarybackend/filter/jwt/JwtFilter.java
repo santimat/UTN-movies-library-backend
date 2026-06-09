@@ -3,12 +3,14 @@ package com.utntp.utnmovieslibrarybackend.filter.jwt;
 import com.utntp.utnmovieslibrarybackend.service.jwt.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 @Component
 public class JwtFilter extends OncePerRequestFilter {
@@ -25,30 +27,31 @@ public class JwtFilter extends OncePerRequestFilter {
         // Skip JWT validation for login or register
         String path = request.getRequestURI();
         String method = request.getMethod();
-        boolean isLogin = path.contains("/api/auth/login");
-        boolean isSignIn = path.contains("/api/users") && method.equals("POST");
-        if(isLogin || isSignIn) {
+        boolean isLogin = path.contains("/api/auth/login") && method.equals("POST");
+        boolean isSignIn = path.contains("/api/auth/register") && method.equals("POST");
+        boolean isGetMovies = request.getRequestURI().contains("/api/movies") && request.getMethod().equals("GET");
+        boolean isGetGenres = request.getRequestURI().contains("/api/genres") && request.getMethod().equals("GET");
+        boolean isGetReviews = request.getRequestURI().contains("/api/reviews") && request.getMethod().equals("GET");
+        if(isLogin || isSignIn || isGetGenres || isGetMovies || isGetReviews) {
             filterChain.doFilter(request,response);
             return;
         }
 
-        boolean isGetMovies = request.getRequestURI().contains("/api/movies");
-        boolean isGetGenres = request.getRequestURI().contains("/api/genres");
-        if((isGetMovies || isGetGenres) && request.getMethod().equals("GET")){
-            filterChain.doFilter(request,response);
-            return;
+        String token = null;
+        if(request.getCookies() != null){
+            token = Arrays.stream(request.getCookies())
+                    .filter(c -> c.getName().equals("token"))
+                    .map(Cookie::getValue)
+                    .findFirst()
+                    .orElse(null);
+
         }
 
-        String authHeader = request.getHeader("Authorization");
-        // if header is empty or it has incorrect format
-        if(authHeader == null || !authHeader.startsWith("Bearer")){
+        if(token == null || token.isEmpty()){
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getWriter().write("Unauthorized: Missing or invalid Authorization header");
+            response.getWriter().write("Unauthorized: Missing token");
             return;
         }
-
-        // extract token, if header is "Bearer misupertoken" we just keep "misupertoken"
-        String token = authHeader.substring(7);
 
         if(!jwtService.isTokenValid(token)){
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
