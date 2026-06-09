@@ -1,6 +1,6 @@
 package com.utntp.utnmovieslibrarybackend.controller.user;
 
-import com.utntp.utnmovieslibrarybackend.dto.request.user.UserRequest;
+import com.utntp.utnmovieslibrarybackend.dto.request.auth.AuthRegisterRequest;
 import com.utntp.utnmovieslibrarybackend.dto.response.user.UserResponse;
 import com.utntp.utnmovieslibrarybackend.mapper.user.UserMapper;
 import com.utntp.utnmovieslibrarybackend.model.user.User;
@@ -23,7 +23,7 @@ public class UserPutController {
 
     @PutMapping("/{id}")
     public ResponseEntity<UserResponse> updateUserById(@PathVariable Long id,
-                                            @Valid @RequestBody UserRequest userRequest){
+                                            @Valid @RequestBody AuthRegisterRequest userRequest){
         User user = userUpdaterService.update(id, userRequest);
         UserResponse userResponse = userMapper.toResponse(user);
         return ResponseEntity.ok(userResponse);
