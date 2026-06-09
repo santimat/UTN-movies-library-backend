@@ -33,8 +33,7 @@ public class ReviewCreatorService {
 
         Movie movieProxy = entityManager.getReference(Movie.class, reviewRequest.getMovieId());
         User userProxy = entityManager.getReference(User.class, userId);
-        Review review = reviewMapper.toEntity(reviewRequest, movieProxy);
-        review.setUser(userProxy);
+        Review review = reviewMapper.toEntity(reviewRequest, movieProxy, userProxy);
         return jpaReviewRepository.save(review);
     }
 }
