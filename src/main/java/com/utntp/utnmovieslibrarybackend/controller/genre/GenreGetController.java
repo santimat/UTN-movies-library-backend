@@ -19,12 +19,12 @@ public class GenreGetController {
 
     public GenreGetController(GenreFinderService genreFinderService) {
         this.genreFinderService = genreFinderService;
-        this.genreMapper =  new GenreMapper();
+        this.genreMapper = new GenreMapper();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GenreResponse> getGenreById(@PathVariable Long id){
-        Genre genre = genreFinderService.find(id);
+    public ResponseEntity<GenreResponse> getGenreById(@PathVariable Long id) {
+        Genre genre = genreFinderService.findById(id);
         GenreResponse genreResponse = genreMapper.toResponse(genre);
         return ResponseEntity.ok(genreResponse);
     }

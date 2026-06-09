@@ -1,5 +1,6 @@
 package com.utntp.utnmovieslibrarybackend.model.savedMovie;
 
+import com.utntp.utnmovieslibrarybackend.model.movie.Movie;
 import com.utntp.utnmovieslibrarybackend.model.user.User;
 import jakarta.persistence.*;
 
@@ -16,19 +17,21 @@ public class SavedMovie {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToOne(fetch =  FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id", nullable = false)
-
+    private Movie movie;
+    
     @Column(name = "saved_at")
     private LocalDateTime savedAt;
 
     @PrePersist
-    protected void onCreate(){
+    protected void onCreate() {
         this.savedAt = LocalDateTime.now();
     }
 
     public SavedMovie() {
     }
+
     public SavedMovie(Long id, User user, LocalDateTime savedAt) {
         this.id = id;
         this.user = user;

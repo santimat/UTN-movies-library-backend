@@ -2,7 +2,7 @@ package com.utntp.utnmovieslibrarybackend.dto.response.review;
 
 public class ReviewResponse {
     private Long id;
-    private Integer rating;
+    private Double rating;
     private String comment;
     private Long movieId;
     private String movieTitle;
@@ -11,7 +11,7 @@ public class ReviewResponse {
     public ReviewResponse() {
     }
 
-    public ReviewResponse(Long id,String movieTitle, Integer rating, String comment, Long movieId, String username) {
+    public ReviewResponse(Long id, String movieTitle, Double rating, String comment, Long movieId, String username) {
         this.id = id;
         this.rating = rating;
         this.comment = comment;
@@ -28,11 +28,11 @@ public class ReviewResponse {
         this.id = id;
     }
 
-    public Integer getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 
