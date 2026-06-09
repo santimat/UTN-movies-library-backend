@@ -5,10 +5,12 @@ import com.utntp.utnmovieslibrarybackend.dto.response.review.ReviewResponse;
 import com.utntp.utnmovieslibrarybackend.mapper.review.ReviewMapper;
 import com.utntp.utnmovieslibrarybackend.model.review.Review;
 import com.utntp.utnmovieslibrarybackend.security.JwtService;
+import com.utntp.utnmovieslibrarybackend.security.UserPrincipal;
 import com.utntp.utnmovieslibrarybackend.service.review.ReviewCreatorService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,10 +28,8 @@ public class ReviewPostController {
 
     @PostMapping
     public ResponseEntity<ReviewResponse> createReview(@Valid @RequestBody ReviewRequest reviewRequest,
-                                                       @CookieValue(value = "token") String token){
-
-        Long userId = jwtService.getUserId(token);
-        Review review = reviewCreatorService.create(reviewRequest, userId);
+                                                       @AuthenticationPrincipal UserPrincipal userPrincipal){
+        Review review = reviewCreatorService.create(reviewRequest, userPrincipal.getId());
         ReviewResponse reviewResponse = reviewMapper.toResponse(review);
         return ResponseEntity.status(HttpStatus.CREATED).body(reviewResponse);
     }
