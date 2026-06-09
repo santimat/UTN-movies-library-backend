@@ -14,8 +14,8 @@ public class UserDeleterService {
         this.userFinderService = userFinderService;
     }
 
-    public void deleter(Long id){
-        userFinderService.find(id);
+    public void deleteById(Long id){
+        userFinderService.findById(id);
         jpaUserRepository.deleteById(id);
     }
 }

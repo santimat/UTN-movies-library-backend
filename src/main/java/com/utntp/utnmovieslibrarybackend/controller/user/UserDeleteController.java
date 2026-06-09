@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/users")
+@RequestMapping("/api/users")
 public class UserDeleteController {
     private final UserDeleterService userDeleterService;
 
@@ -18,8 +18,8 @@ public class UserDeleteController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUserById(@PathVariable Long id){
-        userDeleterService.deleter(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<String> deleteUserById(@PathVariable Long id){
+        userDeleterService.deleteById(id);
+        return ResponseEntity.ok("User deleted successfully");
     }
 }
