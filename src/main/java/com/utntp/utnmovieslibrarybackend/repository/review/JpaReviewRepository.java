@@ -9,15 +9,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface JpaReviewRepository extends JpaRepository<Review, Long>, JpaSpecificationExecutor<Review> {
 
-    @Query("SELECT r FROM Review r JOIN FETCH r.movie WHERE r.movie.id = :movieId")
-    Page<Review> findByMovieId(@Param("movieId") Long movieId, Pageable pageable);
+    Page<Review> findByMovieId( Long movieId, Pageable pageable);
 
-    @Query("SELECT r FROM Review r JOIN FETCH r.user WHERE r.user.id = :userId")
-    Page<Review> findByUserId(@Param("userId") Long userId, Pageable pageable);
+    Page<Review> findByUserId(Long userId, Pageable pageable);
 
-    @Query("SELECT AVG(r.rating) FROM Review r WHERE r.movie.id = :movieId")
-    Double findAverageRatingByMovieId(@Param("movieId") Long movieId);
+    Optional<Double> findAvgRatingByMovieId(Long movieId);
+
 }
