@@ -61,4 +61,8 @@ public class SavedMovie {
     public void setSavedAt(LocalDateTime savedAt) {
         this.savedAt = savedAt;
     }
+
+    public void setMovie(Movie movie){this.movie = movie;}
+
+    public Movie getMovie(){return movie;}
 }
