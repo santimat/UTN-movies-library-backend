@@ -13,13 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/auth/admin")
 public class AuthVerifyAdminController {
 
-    public AuthVerifyAdminController( ) {
-
+    public AuthVerifyAdminController() {
     }
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<UserResponse> verifyAdmin(@AuthenticationPrincipal UserPrincipal userPrincipal){
+    public ResponseEntity<UserResponse> verifyAdmin(@AuthenticationPrincipal UserPrincipal userPrincipal) {
         UserResponse userResponse = new UserResponse(
                 userPrincipal.getId(),
                 userPrincipal.getUsername(),
