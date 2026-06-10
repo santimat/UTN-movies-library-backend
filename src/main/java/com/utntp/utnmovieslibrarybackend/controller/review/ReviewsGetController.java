@@ -25,7 +25,7 @@ public class ReviewsGetController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ReviewResponse>> getReviews(@RequestParam(defaultValue ="0" ) int page,
+    public ResponseEntity<Page<ReviewResponse>> findAllReviews(@RequestParam(defaultValue ="0" ) int page,
                                                        @RequestParam(defaultValue = "5") int size){
         Pageable pageable = PageRequest.of(page, size);
         Page<Review> reviews = reviewsSearcherService.findAll(pageable);
