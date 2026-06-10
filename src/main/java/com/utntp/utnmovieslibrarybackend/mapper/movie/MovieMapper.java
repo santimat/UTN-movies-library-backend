@@ -10,7 +10,7 @@ public class MovieMapper {
     public MovieMapper() {
     }
 
-    public Movie toEntity(MovieRequest request, Genre genre){
+    public Movie toEntity(MovieRequest request, Genre genre) {
         Movie movie = new Movie();
         movie.setTitle(request.getTitle());
         movie.setDirector(request.getDirector());
@@ -18,13 +18,14 @@ public class MovieMapper {
         movie.setSynopsis(request.getSynopsis());
         movie.setYear(request.getYear());
         movie.setPosterUrl(request.getPosterUrl());
+        movie.setPosterUrl(request.getPosterUrl());
         movie.setDuration(request.getDuration());
         return movie;
     }
 
-    public MovieResponse toResponse(Movie movie){
+    public MovieResponse toResponse(Movie movie) {
         return new MovieResponse(movie.getId(), movie.getTitle(), movie.getDirector(), movie.getGenre().getName(),
                 movie.getSynopsis(), movie.getYear(), movie.getPosterUrl(), movie.getAverageRating(),
-                movie.getDuration(),movie.getTrailerUrl());
+                movie.getDuration(), movie.getTrailerUrl());
     }
 }

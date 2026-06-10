@@ -2,6 +2,7 @@ package com.utntp.utnmovieslibrarybackend.dto.request.movie;
 
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.*;
+import org.springframework.web.multipart.MultipartFile;
 
 public class MovieRequest {
 
@@ -23,6 +24,10 @@ public class MovieRequest {
     @Nullable
     @Size(min = 5, message = "Poster URL must be at least 5 characters long")
     private String posterUrl;
+
+    @Nullable
+    MultipartFile posterFile;
+
     @NotNull
     @Min(value = 1, message = "Duration must be at least 1 minute")
     private Double duration;
@@ -33,16 +38,17 @@ public class MovieRequest {
     public MovieRequest() {
     }
 
-    public MovieRequest(String title, String director, String genre, String synopsis, Integer year,
-                        @Nullable String posterUrl, Double duration, @Nullable String trailerUrl) {
+    public MovieRequest(String title, String director, String genre, String synopsis, Integer year, Double duration,
+                        @Nullable String posterUrl,@Nullable MultipartFile posterFile, @Nullable String trailerUrl) {
         this.title = title;
         this.director = director;
         this.genre = genre;
         this.synopsis = synopsis;
         this.year = year;
+        this.duration = duration;
+        this.posterFile = posterFile;
         this.posterUrl = posterUrl;
         this.trailerUrl = trailerUrl;
-        this.duration = duration;
     }
 
 
@@ -110,5 +116,14 @@ public class MovieRequest {
 
     public void setTrailerUrl(@Nullable String trailerUrl) {
         this.trailerUrl = trailerUrl;
+    }
+
+    @Nullable
+    public MultipartFile getPosterFile() {
+        return posterFile;
+    }
+
+    public void setPosterFile(@Nullable MultipartFile posterFile) {
+        this.posterFile = posterFile;
     }
 }

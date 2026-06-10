@@ -21,14 +21,15 @@ public class MovieCreatorService {
         this.movieMapper = new MovieMapper();
     }
 
-    public Movie create(MovieRequest movieRequest){
+    public Movie create(MovieRequest movieRequest) {
+
         Genre savedGenre = jpaGenreRepository.findByName(movieRequest.getGenre()).
                 orElseGet(() -> {
                     Genre newGenre = new Genre();
                     newGenre.setName(movieRequest.getGenre());
                     return jpaGenreRepository.save(newGenre);
                 });
-        Movie movie = movieMapper.toEntity(movieRequest,savedGenre);
+        Movie movie = movieMapper.toEntity(movieRequest, savedGenre);
         return jpaMovieRepository.save(movie);
     }
 }

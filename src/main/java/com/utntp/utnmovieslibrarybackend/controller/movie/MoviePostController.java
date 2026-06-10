@@ -9,8 +9,8 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,7 +27,7 @@ public class MoviePostController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<MovieResponse> createMovie(@Valid @RequestBody MovieRequest movieRequest){
+    public ResponseEntity<MovieResponse> createMovie(@ModelAttribute @Valid MovieRequest movieRequest) {
         Movie movie = movieCreatorService.create(movieRequest);
         MovieResponse movieResponse = movieMapper.toResponse(movie);
         return ResponseEntity.status(HttpStatus.CREATED).body(movieResponse);
