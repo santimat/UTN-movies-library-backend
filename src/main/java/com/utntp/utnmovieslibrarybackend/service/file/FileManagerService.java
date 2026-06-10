@@ -35,7 +35,7 @@ public class FileManagerService {
             if (originalFileName != null && originalFileName.contains("."))
                 extension = originalFileName.substring(originalFileName.lastIndexOf("."));
 
-            String nameToSaveFile = UUID.randomUUID().toString() + extension;
+            String nameToSaveFile = UUID.randomUUID() + extension;
             Path pathToSaveFile = this.uploadsDir.resolve(nameToSaveFile);
 
             Files.copy(file.getInputStream(), pathToSaveFile, StandardCopyOption.REPLACE_EXISTING);
