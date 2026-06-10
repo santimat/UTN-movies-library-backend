@@ -25,7 +25,7 @@ public class GenresGetController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<GenreResponse>> getGenres(@RequestParam(defaultValue = "0") int page,
+    public ResponseEntity<Page<GenreResponse>> getAllGenres(@RequestParam(defaultValue = "0") int page,
                                                          @RequestParam(defaultValue = "5") int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Genre> genres = genresSearcherService.findAll(pageable);

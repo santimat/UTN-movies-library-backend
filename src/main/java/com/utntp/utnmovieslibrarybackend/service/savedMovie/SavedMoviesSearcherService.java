@@ -1,6 +1,6 @@
 package com.utntp.utnmovieslibrarybackend.service.savedMovie;
 
-import com.utntp.utnmovieslibrarybackend.model.savedMovie.SavedMovie;
+import com.utntp.utnmovieslibrarybackend.model.movie.Movie;
 import com.utntp.utnmovieslibrarybackend.repository.savedMovie.JpaSavedMovieRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,8 +14,8 @@ public class SavedMoviesSearcherService {
         this.jpaSavedMovieRepository = jpaSavedMovieRepository;
     }
 
-    public Page<SavedMovie> findAll(Pageable pageable){
-        return jpaSavedMovieRepository.findAll(pageable);
+    public Page<Movie> findAll(Pageable pageable, Long userId){
+        return jpaSavedMovieRepository.findAllByUserId(userId, pageable);
     }
 }
 

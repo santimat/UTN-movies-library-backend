@@ -2,6 +2,7 @@ package com.utntp.utnmovieslibrarybackend.service.savedMovie;
 
 import com.utntp.utnmovieslibrarybackend.dto.request.savedmovie.SavedMovieRequest;
 import com.utntp.utnmovieslibrarybackend.exception.ResourceNotFoundException;
+import com.utntp.utnmovieslibrarybackend.mapper.savedmovie.SavedMovieMapper;
 import com.utntp.utnmovieslibrarybackend.model.movie.Movie;
 import com.utntp.utnmovieslibrarybackend.model.savedMovie.SavedMovie;
 import com.utntp.utnmovieslibrarybackend.model.user.User;
@@ -31,7 +32,7 @@ public class SavedMovieCreatorService {
 
         Movie movieProxy = entityManager.getReference(Movie.class, savedMovieRequest.getMovieId());
         User userProxy = entityManager.getReference(User.class, userId);
-        SavedMovie savedMovie = savedMovieMapper.toEntity(savedMovieRequest, movieProxy, userProxy);
+        SavedMovie savedMovie = savedMovieMapper.toEntity(movieProxy, userProxy);
         return jpaSavedMovieRepository.save(savedMovie);
     }
 
