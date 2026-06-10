@@ -10,15 +10,14 @@ public class MovieMapper {
     public MovieMapper() {
     }
 
-    public Movie toEntity(MovieRequest request, Genre genre) {
+    public Movie toEntity(MovieRequest request, Genre genre, String posterUrlToSave) {
         Movie movie = new Movie();
         movie.setTitle(request.getTitle());
         movie.setDirector(request.getDirector());
         movie.setGenre(genre);
         movie.setSynopsis(request.getSynopsis());
         movie.setYear(request.getYear());
-        movie.setPosterUrl(request.getPosterUrl());
-        movie.setPosterUrl(request.getPosterUrl());
+        movie.setPosterUrl(posterUrlToSave);
         movie.setDuration(request.getDuration());
         return movie;
     }

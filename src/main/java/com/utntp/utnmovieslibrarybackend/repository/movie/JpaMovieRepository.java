@@ -14,18 +14,20 @@ import org.springframework.stereotype.Repository;
 public interface JpaMovieRepository extends JpaRepository<Movie, Long>, JpaSpecificationExecutor<Movie> {
 
     @Query("""
-    SELECT m FROM Movie m
-    WHERE
-        (:genre IS NULL OR LOWER(m.genre.name) = LOWER(CAST(:genre AS string)))
-        AND (
-            :searchText IS NULL OR
-            (:searchText IS NULL OR LOWER(m.director) LIKE LOWER(CONCAT('%', CAST(:searchText AS string), '%')))
-        OR (:searchText IS NULL OR LOWER(m.title) LIKE LOWER(CONCAT('%', CAST(:searchText AS string), '%')))
-        )
-    """)
+            SELECT m FROM Movie m
+            WHERE
+                (:genre IS NULL OR LOWER(m.genre.name) = LOWER(CAST(:genre AS string)))
+                AND (
+                    :searchText IS NULL OR
+                    (:searchText IS NULL OR LOWER(m.director) LIKE LOWER(CONCAT('%', CAST(:searchText AS string), '%')))
+                OR (:searchText IS NULL OR LOWER(m.title) LIKE LOWER(CONCAT('%', CAST(:searchText AS string), '%')))
+                )
+            """)
     Page<Movie> findAllWithFilters(@Param(value = "genre") String genre, @Param(value = "searchText") String searchText,
-                  Pageable pageable);
+                                   Pageable pageable);
 
     boolean existsById(@NonNull Long id);
+
+    boolean existsByTitle(@NonNull String title);
 
 }

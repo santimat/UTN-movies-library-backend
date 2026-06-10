@@ -18,15 +18,15 @@ public class SavedMovieCreatorService {
     private final EntityManager entityManager;
     private final SavedMovieMapper savedMovieMapper;
 
-    public SavedMovieCreatorService(JpaSavedMovieRepository jpaSavedMovieRepository, JpaMovieRepository jpaMovieRepository, EntityManager entityManager, SavedMovieMapper savedMovieMapper) {
+    public SavedMovieCreatorService(JpaSavedMovieRepository jpaSavedMovieRepository, JpaMovieRepository jpaMovieRepository, EntityManager entityManager) {
         this.jpaSavedMovieRepository = jpaSavedMovieRepository;
         this.jpaMovieRepository = jpaMovieRepository;
         this.entityManager = entityManager;
-        this.savedMovieMapper = savedMovieMapper;
+        this.savedMovieMapper = new SavedMovieMapper();
     }
 
-    public SavedMovie create(SavedMovieRequest savedMovieRequest, Long userId){
-        if(!jpaMovieRepository.existsById(savedMovieRequest.getMovieId())){
+    public SavedMovie create(SavedMovieRequest savedMovieRequest, Long userId) {
+        if (!jpaMovieRepository.existsById(savedMovieRequest.getMovieId())) {
             throw new ResourceNotFoundException("Movie with id: " + savedMovieRequest.getMovieId() + " not found.");
         }
 

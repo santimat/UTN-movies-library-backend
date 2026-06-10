@@ -16,8 +16,9 @@ public class FileManagerService {
 
     private final Path uploadsDir;
 
-    public FileManagerService(@Value("${app.upload.dir}") String uploadsDir) {
+    public FileManagerService(@Value("${app.uploads.dir}") String uploadsDir) {
         this.uploadsDir = Path.of(uploadsDir);
+
         try {
             Files.createDirectories(this.uploadsDir);
         } catch (IOException e) {

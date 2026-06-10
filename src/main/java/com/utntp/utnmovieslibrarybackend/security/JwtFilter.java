@@ -19,20 +19,22 @@ import java.util.Arrays;
 public class JwtFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final AntPathMatcher pathMatcher = new AntPathMatcher();
+
     public JwtFilter(JwtService jwtService) {
         this.jwtService = jwtService;
     }
 
     @Override
-    protected boolean shouldNotFilter(@NonNull HttpServletRequest req){
+    protected boolean shouldNotFilter(@NonNull HttpServletRequest req) {
         String path = req.getRequestURI();
         String method = req.getMethod();
         // must return true to avoid filter
-        return (pathMatcher.match("/api/auth/login", path) &&"POST".equals(method)) ||
+        return (pathMatcher.match("/api/auth/login", path) && "POST".equals(method)) ||
                 (pathMatcher.match("/api/auth/register", path) && "POST".equals(method)) ||
-                (pathMatcher.match("/api/movies/**",path) && "GET".equals(method)) ||
-                (pathMatcher.match("/api/genres/**",path) && "GET".equals(method)) ||
-                (pathMatcher.match("/api/reviews/**",path) && "GET".equals(method));
+                (pathMatcher.match("/api/movies/**", path) && "GET".equals(method)) ||
+                (pathMatcher.match("/api/genres/**", path) && "GET".equals(method)) ||
+                (pathMatcher.match("/api/reviews/**", path) && "GET".equals(method)) ||
+                (pathMatcher.match("/uploads/**", path) && "GET".equals(method));
     }
 
     @Override
@@ -40,7 +42,7 @@ public class JwtFilter extends OncePerRequestFilter {
                                     @NonNull FilterChain filterChain) throws IOException, ServletException {
 
         String token = null;
-        if(request.getCookies() != null){
+        if (request.getCookies() != null) {
             token = Arrays.stream(request.getCookies())
                     .filter(c -> c.getName().equals("token"))
                     .map(Cookie::getValue)
@@ -49,14 +51,14 @@ public class JwtFilter extends OncePerRequestFilter {
 
         }
 
-        if(token == null || token.isEmpty()){
+        if (token == null || token.isEmpty()) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setContentType("application/json");
             response.getWriter().write("{\"error\": \"Unauthorized: Missing token\"}");
             return;
         }
 
-        if(!jwtService.isTokenValid(token)){
+        if (!jwtService.isTokenValid(token)) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setContentType("application/json");
             response.getWriter().write("{\"error\": \"Unauthorized: Invalid token \"}");
@@ -76,6 +78,6 @@ public class JwtFilter extends OncePerRequestFilter {
         SecurityContextHolder.getContext().setAuthentication(authToken);
 
         // if token is valid and everything is okay
-        filterChain.doFilter(request,response);
+        filterChain.doFilter(request, response);
     }
 }
