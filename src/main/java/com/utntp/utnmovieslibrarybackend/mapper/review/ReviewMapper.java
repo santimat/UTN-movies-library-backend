@@ -11,7 +11,7 @@ public class ReviewMapper {
     public ReviewMapper() {
     }
 
-    public Review toEntity(ReviewRequest request, Movie movie, User user){
+    public Review toEntity(ReviewRequest request, Movie movie, User user) {
         Review review = new Review();
         review.setRating(request.getRating());
         review.setComment(request.getComment());
@@ -20,8 +20,8 @@ public class ReviewMapper {
         return review;
     }
 
-    public ReviewResponse toResponse(Review review){
-        return new ReviewResponse(review.getId(), review.getMovie().getTitle(),review.getRating(),
-                review.getComment(), review.getMovie().getId(), review.getUser().getName());
+    public ReviewResponse toResponse(Review review) {
+        return new ReviewResponse(review.getId(), review.getMovie().getTitle(), review.getRating(),
+                review.getComment(), review.getMovie().getId(), review.getUser().getName(), review.getUser().getId());
     }
 }

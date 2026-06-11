@@ -10,6 +10,7 @@ public class ReviewRequest {
     @Max(value = 5, message = "Rating must be at most 5")
     private Double rating;
     @NotBlank
+    @NotNull
     @Size(min = 1, max = 500, message = "Comment must be between 1 and 500 characters")
     private String comment;
     @NotNull

@@ -27,11 +27,11 @@ public class MoviesGetController {
 
     @GetMapping
     public ResponseEntity<Page<MovieResponse>> getAllMovies(@RequestParam(defaultValue = "0") int page,
-                                                         @RequestParam(defaultValue = "5") int size,
-                                                         @RequestParam(defaultValue = "title") String sortBy,
-                                                         @RequestParam(defaultValue = "ASC") String sortOrder,
-                                                         @RequestParam(required = false) String genre,
-                                                         @RequestParam(required = false) String searchText) {
+                                                            @RequestParam(defaultValue = "5") int size,
+                                                            @RequestParam(defaultValue = "title") String sortBy,
+                                                            @RequestParam(defaultValue = "ASC") String sortOrder,
+                                                            @RequestParam(required = false) String genre,
+                                                            @RequestParam(required = false) String searchText) {
         Sort.Direction sortDirection = Sort.Direction.fromString(sortOrder);
         Sort sortConfig = Sort.by(sortDirection, sortBy);
         Pageable pageable = PageRequest.of(page, size, sortConfig);

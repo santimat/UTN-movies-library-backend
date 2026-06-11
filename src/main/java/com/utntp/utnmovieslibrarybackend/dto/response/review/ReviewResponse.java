@@ -4,19 +4,22 @@ public class ReviewResponse {
     private Long id;
     private Double rating;
     private String comment;
-    private Long movieId;
     private String movieTitle;
     private String username;
+    private Long movieId;
+    private Long userId;
 
     public ReviewResponse() {
     }
 
-    public ReviewResponse(Long id, String movieTitle, Double rating, String comment, Long movieId, String username) {
+    public ReviewResponse(Long id, String movieTitle, Double rating, String comment, Long movieId, String username,
+                          Long userId) {
         this.id = id;
         this.rating = rating;
         this.comment = comment;
         this.movieId = movieId;
         this.movieTitle = movieTitle;
+        this.userId = userId;
         this.username = username;
     }
 
@@ -66,5 +69,13 @@ public class ReviewResponse {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }
