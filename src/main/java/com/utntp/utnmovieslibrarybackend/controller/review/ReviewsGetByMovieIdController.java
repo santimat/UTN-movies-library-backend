@@ -7,6 +7,7 @@ import com.utntp.utnmovieslibrarybackend.service.review.ReviewFinderByMovieServi
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,9 +25,11 @@ public class ReviewsGetByMovieIdController {
     @GetMapping("/{movieId}")
     public ResponseEntity<Page<ReviewResponse>> getReviews(@RequestParam(defaultValue = "0") int page,
                                                            @RequestParam(defaultValue = "3") int size,
-                                                           @PathVariable Long movieId){
-        Pageable pageable = PageRequest.of(page, size);
-        Page<Review> reviews = reviewFinderByMovieService.findByMovieId(movieId,pageable);
+                                                           @PathVariable Long movieId) {
+        Sort.Direction direction = Sort.Direction.DESC;
+        Sort sortConfig = Sort.by(direction, "createdAt");
+        Pageable pageable = PageRequest.of(page, size, sortConfig);
+        Page<Review> reviews = reviewFinderByMovieService.findByMovieId(movieId, pageable);
         return ResponseEntity.ok(
                 reviews.map(
                         reviewMapper::toResponse

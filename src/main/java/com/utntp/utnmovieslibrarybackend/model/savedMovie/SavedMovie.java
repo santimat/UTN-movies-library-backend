@@ -20,7 +20,7 @@ public class SavedMovie {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id", nullable = false)
     private Movie movie;
-    
+
     @Column(name = "saved_at")
     private LocalDateTime savedAt;
 
@@ -32,10 +32,9 @@ public class SavedMovie {
     public SavedMovie() {
     }
 
-    public SavedMovie(Long id, User user, LocalDateTime savedAt) {
+    public SavedMovie(Long id, User user) {
         this.id = id;
         this.user = user;
-        this.savedAt = savedAt;
     }
 
     public Long getId() {
@@ -62,7 +61,11 @@ public class SavedMovie {
         this.savedAt = savedAt;
     }
 
-    public void setMovie(Movie movie){this.movie = movie;}
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
 
-    public Movie getMovie(){return movie;}
+    public Movie getMovie() {
+        return movie;
+    }
 }
