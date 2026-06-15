@@ -4,8 +4,8 @@ import com.utntp.utnmovieslibrarybackend.dto.request.auth.AuthRegisterRequest;
 import com.utntp.utnmovieslibrarybackend.model.user.User;
 import com.utntp.utnmovieslibrarybackend.repository.user.JpaUserRepository;
 import com.utntp.utnmovieslibrarybackend.service.file.FileManagerService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class UserUpdaterService {
@@ -20,15 +20,19 @@ public class UserUpdaterService {
         this.fileManagerService = fileManagerService;
     }
 
-    public User updateById(Long id, AuthRegisterRequest userRequest, MultipartFile file){
+    @Transactional
+    public User updateById(Long id, AuthRegisterRequest userRequest){
         User toUpdate = userFinderService.findById(id);
+
+        boolean hasPfpFile = userRequest.getPfpFile() != null && !userRequest.getPfpFile().isEmpty();
+
         toUpdate.setEmail(userRequest.getEmail());
         toUpdate.setName(userRequest.getName());
         toUpdate.setPassword(userRequest.getPassword());
 
-        if(!(file == null) && !file.isEmpty()){
-            String filePath = fileManagerService.createFile(file);
-            toUpdate.setPfpUrl(filePath);
+        if(hasPfpFile){
+            String urlToSave = fileManagerService.createFile(userRequest.getPfpFile());
+            toUpdate.setPfpUrl(urlToSave);
         }
         return jpaUserRepository.save(toUpdate);
     }

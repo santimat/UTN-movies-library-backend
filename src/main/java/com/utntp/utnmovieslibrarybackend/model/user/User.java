@@ -74,7 +74,7 @@ public class User {
         this.role = role;
     }
 
-    public String getPfpUrl(){return pfpUrl;}
+    public String getPfpUrl() { return pfpUrl; }
 
-    public void setPfpUrl(String pfpUrl){this.pfpUrl = pfpUrl;}
+    public void setPfpUrl(String pfpUrl) { this.pfpUrl = pfpUrl; }
 }

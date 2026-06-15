@@ -1,5 +1,7 @@
 package com.utntp.utnmovieslibrarybackend.dto.request.auth;
+import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.*;
+import org.springframework.web.multipart.MultipartFile;
 
 public class AuthRegisterRequest {
     @NotBlank
@@ -11,14 +13,17 @@ public class AuthRegisterRequest {
     @NotBlank
     @Size(min = 6, max = 100, message = "Password should be between 6 and 100 characters")
     private String password;
+    @Nullable
+    private MultipartFile pfpFile;
 
     public AuthRegisterRequest() {
     }
 
-    public AuthRegisterRequest(String name, String email, String password) {
+    public AuthRegisterRequest(String name, String email, String password, @Nullable MultipartFile pfpFile) {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.pfpFile = pfpFile;
     }
 
     public String getName() {
@@ -44,4 +49,10 @@ public class AuthRegisterRequest {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Nullable
+    public MultipartFile getPfpFile() { return pfpFile; }
+
+    public void setPfpFile(@Nullable MultipartFile pfpFile) { this.pfpFile = pfpFile; }
+
 }
