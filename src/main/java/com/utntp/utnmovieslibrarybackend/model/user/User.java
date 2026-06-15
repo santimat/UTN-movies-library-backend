@@ -20,15 +20,18 @@ public class User {
     @Enumerated(EnumType.STRING) // saves "ADMIN" or "USER" instead of 1 or 0
     @Column(nullable = false)
     private UserRoleEnum role = UserRoleEnum.USER;
+    @Column
+    private String pfpUrl;
 
     public User() {
     }
 
-    public User(Long id, String name, String email, String password) {
+    public User(Long id, String name, String email, String password, String pfpUrl) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
+        this.pfpUrl = pfpUrl;
     }
 
     public Long getId() {
@@ -70,4 +73,8 @@ public class User {
     public void setRole(UserRoleEnum role) {
         this.role = role;
     }
+
+    public String getPfpUrl(){return pfpUrl;}
+
+    public void setPfpUrl(String pfpUrl){this.pfpUrl = pfpUrl;}
 }
