@@ -27,7 +27,7 @@ public class MoviesGetController {
 
     @GetMapping
     public ResponseEntity<Page<MovieResponse>> getAllMovies(@RequestParam(defaultValue = "0") int page,
-                                                            @RequestParam(defaultValue = "10") int size,
+                                                            @RequestParam(defaultValue = "6") int size,
                                                             @RequestParam(defaultValue = "averageRating") String sortBy,
                                                             @RequestParam(defaultValue = "ASC") String sortOrder,
                                                             @RequestParam(required = false) String genre,

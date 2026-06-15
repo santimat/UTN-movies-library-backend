@@ -51,7 +51,7 @@ public class MovieCreatorService {
 
         String posterUrlToSave = movieRequest.getPosterUrl();
         if (hasPosterFile) {
-            posterUrlToSave = fileManagerService.createFile(movieRequest.getPosterFile());
+            posterUrlToSave = fileManagerService.createFile(movieRequest.getPosterFile(), "posters/");
         }
 
         Movie movie = movieMapper.toEntity(movieRequest, savedGenre, posterUrlToSave);

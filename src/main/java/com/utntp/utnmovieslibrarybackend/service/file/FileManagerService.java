@@ -26,7 +26,7 @@ public class FileManagerService {
         }
     }
 
-    public String createFile(MultipartFile file) {
+    public String createFile(MultipartFile file, String subDir) {
         if (file == null || file.isEmpty())
             throw new FileManagerException("File is empty");
 
@@ -37,7 +37,7 @@ public class FileManagerService {
                 extension = originalFileName.substring(originalFileName.lastIndexOf("."));
 
             String nameToSaveFile = UUID.randomUUID() + extension;
-            Path pathToSaveFile = this.uploadsDir.resolve(nameToSaveFile);
+            Path pathToSaveFile = this.uploadsDir.resolve(subDir + nameToSaveFile);
 
             Files.copy(file.getInputStream(), pathToSaveFile, StandardCopyOption.REPLACE_EXISTING);
 

@@ -14,14 +14,14 @@ public class UserUpdaterService {
     private final FileManagerService fileManagerService;
 
 
-    public UserUpdaterService(JpaUserRepository jpaUserRepository,  UserFinderService userFinderService, FileManagerService fileManagerService) {
+    public UserUpdaterService(JpaUserRepository jpaUserRepository, UserFinderService userFinderService, FileManagerService fileManagerService) {
         this.jpaUserRepository = jpaUserRepository;
         this.userFinderService = userFinderService;
         this.fileManagerService = fileManagerService;
     }
 
     @Transactional
-    public User updateById(Long id, AuthRegisterRequest userRequest){
+    public User updateById(Long id, AuthRegisterRequest userRequest) {
         User toUpdate = userFinderService.findById(id);
 
         boolean hasPfpFile = userRequest.getPfpFile() != null && !userRequest.getPfpFile().isEmpty();
@@ -30,8 +30,8 @@ public class UserUpdaterService {
         toUpdate.setName(userRequest.getName());
         toUpdate.setPassword(userRequest.getPassword());
 
-        if(hasPfpFile){
-            String urlToSave = fileManagerService.createFile(userRequest.getPfpFile());
+        if (hasPfpFile) {
+            String urlToSave = fileManagerService.createFile(userRequest.getPfpFile(), "userProfiles/");
             toUpdate.setPfpUrl(urlToSave);
         }
         return jpaUserRepository.save(toUpdate);
