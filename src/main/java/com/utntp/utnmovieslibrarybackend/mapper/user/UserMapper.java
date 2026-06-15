@@ -17,11 +17,14 @@ public class UserMapper {
         return user;
     }
     public UserResponse toResponse(User user){
+        String pfpUrl = user.getPfpUrl().contains("uploads/posters") ?
+                "http://localhost:8091/" + user.getPfpUrl() : user.getPfpUrl();
         return new UserResponse(
                 user.getId(),
                 user.getName(),
                 user.getEmail(),
-                user.getRole().toString()
+                user.getRole().toString(),
+                pfpUrl
         );
     }
 
