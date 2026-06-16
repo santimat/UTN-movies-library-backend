@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Min;
 import org.hibernate.annotations.Formula;
 
 @Entity
-@Table(name="movies")
+@Table(name = "movies")
 public class Movie {
 
     @Id
@@ -16,14 +16,14 @@ public class Movie {
     private String title;
     @Column(nullable = false, length = 2000)
     private String synopsis;
-    @ManyToOne(fetch =  FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "genre_id", nullable = false)
     private Genre genre;
     @Column(nullable = false)
     private String director;
     @Column(nullable = false)
     @Min(1888) // The year of the first movie ever made
-    private Integer year;
+    private Integer releaseYear;
     @Column()
     private String posterUrl;
     @Formula("(SELECT COALESCE(AVG(r.rating), 0.0) FROM reviews r WHERE r.movie_id = id)")
@@ -36,14 +36,14 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(Long id, String title, String synopsis, Genre genre, String director, Integer year, String posterUrl
+    public Movie(Long id, String title, String synopsis, Genre genre, String director, Integer releaseYear, String posterUrl
             , Double duration, String trailerUrl) {
         this.id = id;
         this.title = title;
         this.synopsis = synopsis;
         this.genre = genre;
         this.director = director;
-        this.year = year;
+        this.releaseYear = releaseYear;
         this.posterUrl = posterUrl;
         this.duration = duration;
         this.trailerUrl = trailerUrl;
@@ -89,12 +89,12 @@ public class Movie {
         this.director = director;
     }
 
-    public Integer getYear() {
-        return year;
+    public Integer getReleaseYear() {
+        return releaseYear;
     }
 
-    public void setYear(Integer year) {
-        this.year = year;
+    public void setReleaseYear(Integer releaseYear) {
+        this.releaseYear = releaseYear;
     }
 
     public String getPosterUrl() {

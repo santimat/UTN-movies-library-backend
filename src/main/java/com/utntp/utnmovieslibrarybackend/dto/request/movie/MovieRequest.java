@@ -1,7 +1,10 @@
 package com.utntp.utnmovieslibrarybackend.dto.request.movie;
 
 import jakarta.annotation.Nullable;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.springframework.web.multipart.MultipartFile;
 
 public class MovieRequest {
@@ -20,7 +23,7 @@ public class MovieRequest {
     private String synopsis;
     @NotNull
     @Min(value = 1888, message = "Year must be no earlier than 1888")
-    private Integer year;
+    private Integer releaseYear;
     @Nullable
     @Size(min = 5, message = "Poster URL must be at least 5 characters long")
     private String posterUrl;
@@ -38,13 +41,13 @@ public class MovieRequest {
     public MovieRequest() {
     }
 
-    public MovieRequest(String title, String director, String genre, String synopsis, Integer year, Double duration,
-                        @Nullable String posterUrl,@Nullable MultipartFile posterFile, @Nullable String trailerUrl) {
+    public MovieRequest(String title, String director, String genre, String synopsis, Integer releaseYear, Double duration,
+                        @Nullable String posterUrl, @Nullable MultipartFile posterFile, @Nullable String trailerUrl) {
         this.title = title;
         this.director = director;
         this.genre = genre;
         this.synopsis = synopsis;
-        this.year = year;
+        this.releaseYear = releaseYear;
         this.duration = duration;
         this.posterFile = posterFile;
         this.posterUrl = posterUrl;
@@ -84,12 +87,12 @@ public class MovieRequest {
         this.synopsis = synopsis;
     }
 
-    public Integer getYear() {
-        return year;
+    public Integer getReleaseYear() {
+        return releaseYear;
     }
 
-    public void setYear(Integer year) {
-        this.year = year;
+    public void setReleaseYear(Integer releaseYear) {
+        this.releaseYear = releaseYear;
     }
 
     @Nullable

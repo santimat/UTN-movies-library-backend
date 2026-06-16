@@ -16,7 +16,7 @@ public class MovieResponse {
     @NotBlank
     private String synopsis;
     @NotNull
-    private Integer year;
+    private Integer releaseYear;
     @Nullable
     private String posterUrl;
     @NotNull
@@ -25,17 +25,18 @@ public class MovieResponse {
     private Double duration;
     @Nullable
     private String trailerUrl;
+
     public MovieResponse() {
     }
 
-    public MovieResponse(Long id, String title, String director, String genre, String synopsis, Integer year,
+    public MovieResponse(Long id, String title, String director, String genre, String synopsis, Integer releaseYear,
                          @Nullable String posterUrl, Double averageRating, Double duration, @Nullable String trailerUrl) {
         this.id = id;
         this.title = title;
         this.director = director;
         this.genre = genre;
         this.synopsis = synopsis;
-        this.year = year;
+        this.releaseYear = releaseYear;
         this.posterUrl = posterUrl;
         this.trailerUrl = trailerUrl;
         this.averageRating = averageRating;
@@ -82,12 +83,12 @@ public class MovieResponse {
         this.synopsis = synopsis;
     }
 
-    public Integer getYear() {
-        return year;
+    public Integer getReleaseYear() {
+        return releaseYear;
     }
 
-    public void setYear(Integer year) {
-        this.year = year;
+    public void setReleaseYear(Integer releaseYear) {
+        this.releaseYear = releaseYear;
     }
 
     @Nullable

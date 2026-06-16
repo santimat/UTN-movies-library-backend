@@ -21,11 +21,11 @@ public class MovieUpdaterService {
         this.jpaGenreRepository = jpaGenreRepository;
     }
 
-    public Movie update(Long id, MovieRequest movieRequest){
+    public Movie update(Long id, MovieRequest movieRequest) {
         Optional<Genre> existsGenre = jpaGenreRepository.findByName(movieRequest.getGenre());
         Movie toUpdate = movieFinderService.findById(id);
-        if(existsGenre.isPresent()) toUpdate.setGenre(existsGenre.get());
-        else{
+        if (existsGenre.isPresent()) toUpdate.setGenre(existsGenre.get());
+        else {
             Genre newGenre = new Genre();
             newGenre.setName(movieRequest.getGenre());
             Genre savedGenre = jpaGenreRepository.save(newGenre);
@@ -34,7 +34,7 @@ public class MovieUpdaterService {
         toUpdate.setDirector(movieRequest.getDirector());
         toUpdate.setSynopsis(movieRequest.getSynopsis());
         toUpdate.setTitle(movieRequest.getTitle());
-        toUpdate.setYear(movieRequest.getYear());
+        toUpdate.setReleaseYear(movieRequest.getReleaseYear());
         toUpdate.setPosterUrl(movieRequest.getPosterUrl());
         return jpaMovieRepository.save(toUpdate);
     }

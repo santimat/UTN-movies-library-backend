@@ -16,7 +16,7 @@ public class MovieMapper {
         movie.setDirector(request.getDirector());
         movie.setGenre(genre);
         movie.setSynopsis(request.getSynopsis());
-        movie.setYear(request.getYear());
+        movie.setReleaseYear(request.getReleaseYear());
         movie.setPosterUrl(posterUrlToSave);
         movie.setDuration(request.getDuration());
         return movie;
@@ -27,7 +27,7 @@ public class MovieMapper {
         String posterUrl = movie.getPosterUrl().contains("uploads/posters") ?
                 "http://localhost:8091/" + movie.getPosterUrl() : movie.getPosterUrl();
         return new MovieResponse(movie.getId(), movie.getTitle(), movie.getDirector(), movie.getGenre().getName(),
-                movie.getSynopsis(), movie.getYear(), posterUrl, movie.getAverageRating(),
+                movie.getSynopsis(), movie.getReleaseYear(), posterUrl, movie.getAverageRating(),
                 movie.getDuration(), movie.getTrailerUrl());
     }
 }
