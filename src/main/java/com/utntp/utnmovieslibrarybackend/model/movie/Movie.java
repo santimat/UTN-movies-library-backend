@@ -1,6 +1,7 @@
 package com.utntp.utnmovieslibrarybackend.model.movie;
 
 import com.utntp.utnmovieslibrarybackend.model.genre.Genre;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import org.hibernate.annotations.Formula;
@@ -32,12 +33,14 @@ public class Movie {
     private Double duration;
     @Column()
     private String trailerUrl;
+    @Column()
+    private String watchUrl;
 
     public Movie() {
     }
 
     public Movie(Long id, String title, String synopsis, Genre genre, String director, Integer releaseYear, String posterUrl
-            , Double duration, String trailerUrl) {
+            , Double duration, String trailerUrl, @Nullable String watchUrl) {
         this.id = id;
         this.title = title;
         this.synopsis = synopsis;
@@ -47,6 +50,7 @@ public class Movie {
         this.posterUrl = posterUrl;
         this.duration = duration;
         this.trailerUrl = trailerUrl;
+        this.watchUrl = watchUrl;
     }
 
     public Long getId() {
@@ -128,4 +132,9 @@ public class Movie {
     public void setTrailerUrl(String trailerUrl) {
         this.trailerUrl = trailerUrl;
     }
+
+    @Nullable
+    public String getWatchUrl() { return watchUrl; }
+
+    public void setWatchUrl(@Nullable String watchUrl) { this.watchUrl = watchUrl; }
 }

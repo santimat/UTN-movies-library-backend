@@ -24,10 +24,15 @@ public class MovieMapper {
 
     public MovieResponse toResponse(Movie movie) {
 
+        String watchUrl = null;
+        if(movie.getWatchUrl() != null){
+            watchUrl = movie.getWatchUrl().contains("uploads/posters") ?
+                    "http://localhost:8091/" + movie.getWatchUrl() : movie.getWatchUrl();
+        }
         String posterUrl = movie.getPosterUrl().contains("uploads/posters") ?
                 "http://localhost:8091/" + movie.getPosterUrl() : movie.getPosterUrl();
         return new MovieResponse(movie.getId(), movie.getTitle(), movie.getDirector(), movie.getGenre().getName(),
                 movie.getSynopsis(), movie.getReleaseYear(), posterUrl, movie.getAverageRating(),
-                movie.getDuration(), movie.getTrailerUrl());
+                movie.getDuration(), movie.getTrailerUrl(), watchUrl);
     }
 }
