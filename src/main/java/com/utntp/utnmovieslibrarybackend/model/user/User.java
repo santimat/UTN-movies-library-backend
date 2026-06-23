@@ -1,6 +1,7 @@
 package com.utntp.utnmovieslibrarybackend.model.user;
 
 import com.utntp.utnmovieslibrarybackend.enums.UserRoleEnum;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
 
@@ -26,7 +27,7 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String name, String email, String password, String pfpUrl) {
+    public User(Long id, String name, String email, String password, @Nullable String pfpUrl) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -74,7 +75,8 @@ public class User {
         this.role = role;
     }
 
+    @Nullable
     public String getPfpUrl() { return pfpUrl; }
 
-    public void setPfpUrl(String pfpUrl) { this.pfpUrl = pfpUrl; }
+    public void setPfpUrl(@Nullable String pfpUrl) { this.pfpUrl = pfpUrl; }
 }
