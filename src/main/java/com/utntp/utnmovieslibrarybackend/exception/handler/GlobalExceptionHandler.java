@@ -2,8 +2,8 @@ package com.utntp.utnmovieslibrarybackend.exception.handler;
 
 import com.utntp.utnmovieslibrarybackend.dto.response.exception.ErrorResponse;
 import com.utntp.utnmovieslibrarybackend.exception.DuplicateResourceException;
+import com.utntp.utnmovieslibrarybackend.exception.OnlySameUserException;
 import com.utntp.utnmovieslibrarybackend.exception.ResourceNotFoundException;
-
 import com.utntp.utnmovieslibrarybackend.exception.WrongPasswordException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,15 +26,21 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponse(409, e.getMessage()));
     }
 
+    @ExceptionHandler(WrongPasswordException.class)
+    public ResponseEntity<ErrorResponse> handleWrongPassword(WrongPasswordException e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponse(401, e.getMessage()));
+    }
+
+    @ExceptionHandler(OnlySameUserException.class)
+    public ResponseEntity<ErrorResponse> handleOnlySameUser(OnlySameUserException e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponse(401, e.getMessage()));
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleJakartaValidation(MethodArgumentNotValidException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse(400, e.getMessage()));
     }
 
-    @ExceptionHandler(WrongPasswordException.class)
-    public ResponseEntity<ErrorResponse> handleWrongPassword(WrongPasswordException e) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponse(401, e.getMessage()));
-    }
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ErrorResponse> handleBadRequest(IllegalArgumentException e) {
@@ -45,7 +51,6 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleAccessDenied(AccessDeniedException e) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ErrorResponse(403, "Access denied: " + e.getMessage()));
     }
-
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneric(Exception e) {

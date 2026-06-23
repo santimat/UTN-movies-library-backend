@@ -23,9 +23,9 @@ public class ReviewPutController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ReviewResponse> updateReviewById(@PathVariable Long id,
-                                              @Valid @RequestBody ReviewRequest reviewRequest){
+                                                           @Valid @RequestBody ReviewRequest reviewRequest) {
         Review review = reviewUpdaterService.updateById(id, reviewRequest);
         ReviewResponse reviewResponse = reviewMapper.toResponse(review);
         return ResponseEntity.ok(reviewResponse);
