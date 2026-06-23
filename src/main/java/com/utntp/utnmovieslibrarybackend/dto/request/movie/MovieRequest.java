@@ -37,12 +37,15 @@ public class MovieRequest {
     @Nullable
     @Size(min = 5, message = "Trailer URL must be at least 5 characters long")
     private String trailerUrl;
+    @Nullable
+    @Size(min = 5, message = "Watch URL must be at least 5 characters long")
+    private String watchUrl;
 
     public MovieRequest() {
     }
 
     public MovieRequest(String title, String director, String genre, String synopsis, Integer releaseYear, Double duration,
-                        @Nullable String posterUrl, @Nullable MultipartFile posterFile, @Nullable String trailerUrl) {
+                        @Nullable String posterUrl, @Nullable MultipartFile posterFile, @Nullable String trailerUrl, @Nullable String watchUrl) {
         this.title = title;
         this.director = director;
         this.genre = genre;
@@ -52,6 +55,7 @@ public class MovieRequest {
         this.posterFile = posterFile;
         this.posterUrl = posterUrl;
         this.trailerUrl = trailerUrl;
+        this.watchUrl = watchUrl;
     }
 
 
@@ -129,4 +133,9 @@ public class MovieRequest {
     public void setPosterFile(@Nullable MultipartFile posterFile) {
         this.posterFile = posterFile;
     }
+
+    @Nullable
+    public String getWatchUrl() { return watchUrl; }
+
+    public void setWatchUrl(@Nullable String watchUrl) { this.watchUrl = watchUrl; }
 }

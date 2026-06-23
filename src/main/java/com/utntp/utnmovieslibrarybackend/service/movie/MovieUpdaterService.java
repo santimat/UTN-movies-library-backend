@@ -36,6 +36,7 @@ public class MovieUpdaterService {
         toUpdate.setTitle(movieRequest.getTitle());
         toUpdate.setReleaseYear(movieRequest.getReleaseYear());
         toUpdate.setPosterUrl(movieRequest.getPosterUrl());
+        toUpdate.setWatchUrl(movieRequest.getWatchUrl());
         return jpaMovieRepository.save(toUpdate);
     }
 }
