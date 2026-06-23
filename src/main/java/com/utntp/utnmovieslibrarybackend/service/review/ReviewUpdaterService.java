@@ -18,6 +18,9 @@ public class ReviewUpdaterService {
 
     public Review updateById(Long id, ReviewRequest reviewRequest){
         Review review = reviewFinderService.findById(id);
+
+        // onlyUserValidatorService.validate(UserdeJWT, review.user.id)
+
         review.setRating(reviewRequest.getRating());
         review.setComment(reviewRequest.getComment());
         return jpaReviewRepository.save(review);

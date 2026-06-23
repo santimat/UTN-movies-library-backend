@@ -15,6 +15,7 @@ public interface JpaMovieRepository extends JpaRepository<Movie, Long>, JpaSpeci
 
     @Query("""
             SELECT m FROM Movie m
+            JOIN Genre g ON (g.id = m.genre.id)
             WHERE
                 (:genre IS NULL OR LOWER(m.genre.name) = LOWER(CAST(:genre AS string)))
                 AND (

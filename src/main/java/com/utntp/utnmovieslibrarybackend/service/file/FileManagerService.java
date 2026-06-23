@@ -32,6 +32,7 @@ public class FileManagerService {
 
         try {
             String originalFileName = file.getOriginalFilename();
+            // TODO VALIDAR CONTENT TYPE
             String extension = "";
             if (originalFileName != null && originalFileName.contains("."))
                 extension = originalFileName.substring(originalFileName.lastIndexOf("."));
