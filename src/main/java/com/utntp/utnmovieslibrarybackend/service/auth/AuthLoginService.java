@@ -15,21 +15,22 @@ public class AuthLoginService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
-    public AuthLoginService(JpaUserRepository jpaUserRepository, PasswordEncoder passwordEncoder, JwtService jwtService){
+    public AuthLoginService(JpaUserRepository jpaUserRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
         this.jpaUserRepository = jpaUserRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
     }
 
 
-    public String login(AuthLoginRequest loginRequest){
+    public String login(AuthLoginRequest loginRequest) {
         User user = jpaUserRepository.findByEmail(loginRequest.getEmail())
                 .orElseThrow(() -> new ResourceNotFoundException("User with email " + loginRequest.getEmail() + " not found"));
 
-        if(!passwordEncoder.matches(loginRequest.getPassword(),user.getPassword())){
-            throw new WrongPasswordException();
+        if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
+            System.out.println("Wrong password");
+            throw new WrongPasswordException("Wrong password");
         }
 
-        return jwtService.generateToken(user.getEmail(),user.getRole(),user.getId(), user.getName());
+        return jwtService.generateToken(user.getEmail(), user.getRole(), user.getId(), user.getName());
     }
 }
