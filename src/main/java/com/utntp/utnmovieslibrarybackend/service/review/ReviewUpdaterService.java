@@ -19,10 +19,10 @@ public class ReviewUpdaterService {
         this.onlySameUserValidatorService = onlySameUserValidatorService;
     }
 
-    public Review updateById(Long id, ReviewRequest reviewRequest) {
+    public Review updateById(Long id, ReviewRequest reviewRequest, Long jwtId) {
         Review review = reviewFinderService.findById(id);
 
-        if (!onlySameUserValidatorService.isSameUser(,review.getUser().getId())) {
+        if (!onlySameUserValidatorService.isSameUser(jwtId, review.getUser().getId())) {
             throw new OnlySameUserException("You can only update your own reviews.");
         }
 
