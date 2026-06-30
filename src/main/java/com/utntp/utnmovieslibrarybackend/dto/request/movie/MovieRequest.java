@@ -27,10 +27,8 @@ public class MovieRequest {
     @Nullable
     @Size(min = 5, message = "Poster URL must be at least 5 characters long")
     private String posterUrl;
-
     @Nullable
-    MultipartFile posterFile;
-
+    private MultipartFile posterFile;
     @NotNull
     @Min(value = 1, message = "Duration must be at least 1 minute")
     private Double duration;
@@ -38,7 +36,6 @@ public class MovieRequest {
     @Size(min = 5, message = "Trailer URL must be at least 5 characters long")
     private String trailerUrl;
     @Nullable
-    @Size(min = 5, message = "Watch URL must be at least 5 characters long")
     private String watchUrl;
 
     public MovieRequest() {
@@ -57,7 +54,6 @@ public class MovieRequest {
         this.trailerUrl = trailerUrl;
         this.watchUrl = watchUrl;
     }
-
 
     public String getTitle() {
         return title;
@@ -135,7 +131,11 @@ public class MovieRequest {
     }
 
     @Nullable
-    public String getWatchUrl() { return watchUrl; }
+    public String getWatchUrl() {
+        return watchUrl;
+    }
 
-    public void setWatchUrl(@Nullable String watchUrl) { this.watchUrl = watchUrl; }
+    public void setWatchUrl(@Nullable String watchUrl) {
+        this.watchUrl = watchUrl;
+    }
 }

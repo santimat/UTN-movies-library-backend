@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class SavedMoviePostController {
     private final SavedMovieCreatorService savedMovieCreatorService;
 
-    public SavedMoviePostController(SavedMovieCreatorService savedMovieCreatorService){
+    public SavedMoviePostController(SavedMovieCreatorService savedMovieCreatorService) {
         this.savedMovieCreatorService = savedMovieCreatorService;
     }
 
     @PostMapping
     public ResponseEntity<String> createSavedMovie(@Valid @RequestBody SavedMovieRequest savedMovieRequest,
-                                                   @AuthenticationPrincipal UserPrincipal userPrincipal){
+                                                   @AuthenticationPrincipal UserPrincipal userPrincipal) {
         savedMovieCreatorService.create(savedMovieRequest, userPrincipal.getId());
-        return ResponseEntity.status(HttpStatus.CREATED).body("The movie with id: " + savedMovieRequest.getMovieId() + "was saved succesfilly.");
+        return ResponseEntity.status(HttpStatus.CREATED).body("The movie with id: " + savedMovieRequest.getMovieId() + " was saved successfully.");
     }
 }

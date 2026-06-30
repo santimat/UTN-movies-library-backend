@@ -1,6 +1,6 @@
 package com.utntp.utnmovieslibrarybackend.controller.user;
 
-import com.utntp.utnmovieslibrarybackend.dto.request.auth.AuthRegisterRequest;
+import com.utntp.utnmovieslibrarybackend.dto.request.user.UserRequest;
 import com.utntp.utnmovieslibrarybackend.dto.response.user.UserResponse;
 import com.utntp.utnmovieslibrarybackend.mapper.user.UserMapper;
 import com.utntp.utnmovieslibrarybackend.model.user.User;
@@ -25,7 +25,7 @@ public class UserPutController {
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN') or #id == authentication.principal.id")
     public ResponseEntity<UserResponse> updateUserById(@PathVariable Long id,
-                                            @Valid @RequestBody AuthRegisterRequest userRequest){
+                                                       @Valid @RequestBody UserRequest userRequest) {
         User user = userUpdaterService.updateById(id, userRequest);
         UserResponse userResponse = userMapper.toResponse(user);
         return ResponseEntity.ok(userResponse);

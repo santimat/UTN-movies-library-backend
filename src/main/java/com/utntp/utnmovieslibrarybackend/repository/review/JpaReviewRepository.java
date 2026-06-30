@@ -11,11 +11,11 @@ import java.util.Optional;
 
 @Repository
 public interface JpaReviewRepository extends JpaRepository<Review, Long>, JpaSpecificationExecutor<Review> {
-
-    Page<Review> findByMovieId( Long movieId, Pageable pageable);
+    Page<Review> findByMovieId(Long movieId, Pageable pageable);
 
     Page<Review> findByUserId(Long userId, Pageable pageable);
 
     Optional<Double> findAvgRatingByMovieId(Long movieId);
 
+    void deleteByMovieId(Long movieId);
 }

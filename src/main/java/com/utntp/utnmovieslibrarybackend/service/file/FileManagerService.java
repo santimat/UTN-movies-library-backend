@@ -32,7 +32,6 @@ public class FileManagerService {
 
         try {
             String originalFileName = file.getOriginalFilename();
-            // TODO VALIDAR CONTENT TYPE
             String extension = "";
             if (originalFileName != null && originalFileName.contains("."))
                 extension = originalFileName.substring(originalFileName.lastIndexOf("."));
@@ -45,6 +44,17 @@ public class FileManagerService {
             return pathToSaveFile.toString().replace('\\', '/');
         } catch (IOException e) {
             throw new FileManagerException("Failed to save file" + e.getMessage());
+        }
+    }
+
+    public void deleteFile(String path) {
+        if (path == null || path.isEmpty())
+            throw new FileManagerException("File path is empty");
+        try {
+            Path pathToDelete = Path.of(path);
+            Files.deleteIfExists(pathToDelete);
+        } catch (IOException e) {
+            throw new FileManagerException("Failed to delete file" + e.getMessage());
         }
     }
 }

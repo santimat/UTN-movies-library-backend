@@ -1,6 +1,7 @@
 package com.utntp.utnmovieslibrarybackend.service.savedMovie;
 
 import com.utntp.utnmovieslibrarybackend.dto.request.savedmovie.SavedMovieRequest;
+import com.utntp.utnmovieslibrarybackend.exception.DuplicateResourceException;
 import com.utntp.utnmovieslibrarybackend.exception.ResourceNotFoundException;
 import com.utntp.utnmovieslibrarybackend.mapper.savedmovie.SavedMovieMapper;
 import com.utntp.utnmovieslibrarybackend.model.movie.Movie;
@@ -28,6 +29,10 @@ public class SavedMovieCreatorService {
     public SavedMovie create(SavedMovieRequest savedMovieRequest, Long userId) {
         if (!jpaMovieRepository.existsById(savedMovieRequest.getMovieId())) {
             throw new ResourceNotFoundException("Movie with id: " + savedMovieRequest.getMovieId() + " not found.");
+        }
+
+        if (jpaSavedMovieRepository.existsByUserIdAndMovieId(userId, savedMovieRequest.getMovieId())) {
+            throw new DuplicateResourceException("Movie with id: " + savedMovieRequest.getMovieId() + " is already saved by user with id: " + userId);
         }
 
         Movie movieProxy = entityManager.getReference(Movie.class, savedMovieRequest.getMovieId());

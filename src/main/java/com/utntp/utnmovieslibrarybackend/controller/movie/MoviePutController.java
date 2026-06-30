@@ -25,7 +25,7 @@ public class MoviePutController {
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<MovieResponse> updateMovieById(@PathVariable Long id,
-                                             @Valid @RequestBody MovieRequest movieRequest){
+                                                         @Valid @ModelAttribute MovieRequest movieRequest) {
         Movie movie = movieUpdaterService.update(id, movieRequest);
         MovieResponse movieResponse = movieMapper.toResponse(movie);
         return ResponseEntity.ok(movieResponse);

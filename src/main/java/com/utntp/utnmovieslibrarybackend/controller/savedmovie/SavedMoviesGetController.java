@@ -21,17 +21,19 @@ public class SavedMoviesGetController {
     private final SavedMoviesSearcherService savedMoviesSearcherService;
     private final MovieMapper movieMapper;
 
-    public SavedMoviesGetController(SavedMoviesSearcherService savedMoviesSearcherService){
+    public SavedMoviesGetController(SavedMoviesSearcherService savedMoviesSearcherService) {
         this.savedMoviesSearcherService = savedMoviesSearcherService;
         this.movieMapper = new MovieMapper();
     }
 
     @GetMapping
     public ResponseEntity<Page<MovieResponse>> findAllSavedMovies(@RequestParam(defaultValue = "0") int page,
-                                                                  @RequestParam(defaultValue = "5")int size,
-                                                                  @AuthenticationPrincipal UserPrincipal userPrincipal){
+                                                                  @RequestParam(defaultValue = "5") int size,
+                                                                  @RequestParam(required = false) String genre,
+                                                                  @RequestParam(required = false) String searchText,
+                                                                  @AuthenticationPrincipal UserPrincipal userPrincipal) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<Movie> movies = savedMoviesSearcherService.findAll(pageable, userPrincipal.getId());
+        Page<Movie> movies = savedMoviesSearcherService.findAll(pageable, userPrincipal.getId(), genre, searchText);
         return ResponseEntity.ok(
                 movies.map(
                         movieMapper::toResponse

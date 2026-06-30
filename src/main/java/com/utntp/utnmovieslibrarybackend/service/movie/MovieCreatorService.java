@@ -2,6 +2,7 @@ package com.utntp.utnmovieslibrarybackend.service.movie;
 
 import com.utntp.utnmovieslibrarybackend.dto.request.movie.MovieRequest;
 import com.utntp.utnmovieslibrarybackend.exception.DuplicateResourceException;
+import com.utntp.utnmovieslibrarybackend.exception.MissingFieldsException;
 import com.utntp.utnmovieslibrarybackend.mapper.movie.MovieMapper;
 import com.utntp.utnmovieslibrarybackend.model.genre.Genre;
 import com.utntp.utnmovieslibrarybackend.model.movie.Movie;
@@ -29,18 +30,12 @@ public class MovieCreatorService {
     // ensure ACID properties of the transaction. If any error occurs, all database changes are rolled back
     @Transactional
     public Movie create(MovieRequest movieRequest) {
+        boolean hasPoster = movieRequest.getPosterFile() != null && !movieRequest.getPosterFile().isEmpty();
+        if (!hasPoster)
+            throw new MissingFieldsException("Poster file is required for creating a movie");
 
         if (jpaMovieRepository.existsByTitle(movieRequest.getTitle()))
             throw new DuplicateResourceException("Movie with title " + movieRequest.getTitle() + " already exists");
-
-        boolean hasPosterUrl = movieRequest.getPosterUrl() != null && !movieRequest.getPosterUrl().trim().isEmpty();
-        boolean hasPosterFile = movieRequest.getPosterFile() != null && !movieRequest.getPosterFile().isEmpty();
-
-        if (!hasPosterUrl && !hasPosterFile)
-            throw new IllegalArgumentException("Either posterUrl or posterFile must be provided");
-
-        if (hasPosterUrl && hasPosterFile)
-            throw new IllegalArgumentException("Have posterUrl and posterFile at the same time is not allowed");
 
         Genre savedGenre = jpaGenreRepository.findByName(movieRequest.getGenre()).
                 orElseGet(() -> {
@@ -49,10 +44,7 @@ public class MovieCreatorService {
                     return jpaGenreRepository.save(newGenre);
                 });
 
-        String posterUrlToSave = movieRequest.getPosterUrl();
-        if (hasPosterFile) {
-            posterUrlToSave = fileManagerService.createFile(movieRequest.getPosterFile(), "posters/");
-        }
+        String posterUrlToSave = fileManagerService.createFile(movieRequest.getPosterFile(), "posters/");
 
         Movie movie = movieMapper.toEntity(movieRequest, savedGenre, posterUrlToSave);
         return jpaMovieRepository.save(movie);

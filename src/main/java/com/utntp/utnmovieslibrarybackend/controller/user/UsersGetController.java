@@ -29,9 +29,11 @@ public class UsersGetController {
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Page<UserResponse>> getUsers(@RequestParam(defaultValue = "0") int page,
-                                                     @RequestParam(defaultValue = "5") int size){
+                                                       @RequestParam(defaultValue = "5") int size,
+                                                       @RequestParam(required = false) String searchText,
+                                                       @RequestParam(required = false) String role) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<User> users = userSearcherService.findAll(pageable);
+        Page<User> users = userSearcherService.findAll(searchText, role, pageable);
         return ResponseEntity.ok(
                 users.map(
                         userMapper::toResponse

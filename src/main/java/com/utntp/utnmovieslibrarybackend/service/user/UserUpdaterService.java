@@ -1,6 +1,6 @@
 package com.utntp.utnmovieslibrarybackend.service.user;
 
-import com.utntp.utnmovieslibrarybackend.dto.request.auth.AuthRegisterRequest;
+import com.utntp.utnmovieslibrarybackend.dto.request.user.UserRequest;
 import com.utntp.utnmovieslibrarybackend.model.user.User;
 import com.utntp.utnmovieslibrarybackend.repository.user.JpaUserRepository;
 import com.utntp.utnmovieslibrarybackend.service.file.FileManagerService;
@@ -21,18 +21,17 @@ public class UserUpdaterService {
     }
 
     @Transactional
-    public User updateById(Long id, AuthRegisterRequest userRequest) {
+    public User updateById(Long id, UserRequest userRequest) {
         User toUpdate = userFinderService.findById(id);
 
         boolean hasPfpFile = userRequest.getPfpFile() != null && !userRequest.getPfpFile().isEmpty();
 
         toUpdate.setEmail(userRequest.getEmail());
         toUpdate.setName(userRequest.getName());
-        toUpdate.setPassword(userRequest.getPassword());
 
         if (hasPfpFile) {
-            String urlToSave = fileManagerService.createFile(userRequest.getPfpFile(), "userProfiles/");
-            toUpdate.setPfpUrl(urlToSave);
+            String newPfpUrl = fileManagerService.createFile(userRequest.getPfpFile(), "userProfiles/");
+            toUpdate.setPfpUrl(newPfpUrl);
         }
         return jpaUserRepository.save(toUpdate);
     }
