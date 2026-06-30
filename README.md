@@ -1,16 +1,34 @@
 # UTN Movies Library Backend
 
-Backend API RESTful para una plataforma de catalogación y reseñado de películas, desarrollado con Spring Boot como
-proyecto de la Universidad Tecnológica Nacional (UTN).
+API RESTful para una plataforma de catalogación y reseñado de películas, desarrollada con Spring Boot como proyecto de la Universidad Tecnológica Nacional (UTN). Permite a los usuarios explorar un catálogo de películas, crear reseñas con calificaciones, guardar películas favoritas y gestionar perfiles de usuario con un sistema de roles (USER / ADMIN).
+
+---
 
 ## Tabla de Contenidos
 
+- [Características Principales](#características-principales)
 - [Stack Tecnológico](#stack-tecnológico)
+- [Requisitos Previos](#requisitos-previos)
+- [Instalación y Ejecución](#instalación-y-ejecución)
+- [Configuración](#configuración)
 - [Arquitectura del Proyecto](#arquitectura-del-proyecto)
 - [Modelo de Datos](#modelo-de-datos)
 - [Autenticación y Seguridad](#autenticación-y-seguridad)
 - [API Endpoints](#api-endpoints)
 - [Features](#features)
+- [Licencia](#licencia)
+
+---
+
+## Características Principales
+
+- **Catálogo de películas**: CRUD completo con búsqueda por título/director y filtrado por género.
+- **Sistema de reseñas**: Los usuarios pueden calificar (1-5) y comentar películas.
+- **Películas favoritas**: Guardar y gestionar películas en una lista personal.
+- **Roles y permisos**: Sistema de control de acceso con roles USER y ADMIN.
+- **Subida de archivos**: Imágenes para posters de películas y fotos de perfil.
+- **Paginación y filtrado**: Todos los listados soportan paginación y filtros.
+- **JWT en cookies HttpOnly**: Autenticación segura con protección contra XSS.
 
 ---
 
@@ -31,10 +49,94 @@ proyecto de la Universidad Tecnológica Nacional (UTN).
 
 ---
 
+## Requisitos Previos
+
+- **Java 25** o superior
+- **PostgreSQL** (local o remoto)
+- **Maven 3.6+** (o usar el Maven Wrapper incluido)
+- Un cliente HTTP para probar la API (Postman, Insomnia, curl, etc.)
+
+---
+
+## Instalación y Ejecución
+
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/tu-usuario/UTN-movies-library-backend.git
+cd UTN-movies-library-backend
+```
+
+### 2. Configurar la base de datos
+
+Crear una base de datos PostgreSQL llamada `movieslibrary`:
+
+```sql
+CREATE DATABASE movieslibrary;
+```
+
+### 3. Configurar las variables de conexión
+
+Editar `src/main/resources/application.properties` con los datos de tu base de datos:
+
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/movieslibrary
+spring.datasource.username=tu_usuario
+spring.datasource.password=tu_contraseña
+```
+
+### 4. Ejecutar la aplicación
+
+**Con Maven Wrapper (recomendado):**
+
+```bash
+# Linux/macOS
+./mvnw spring-boot:run
+
+# Windows
+mvnw.cmd spring-boot:run
+```
+
+**Con Maven instalado:**
+
+```bash
+mvn spring-boot:run
+```
+
+La aplicación arrancará en el puerto **8091** por defecto.
+
+### 5. Verificar
+
+Abrir en el navegador o con curl:
+
+```
+http://localhost:8091
+```
+
+---
+
+## Configuración
+
+Todas las propiedades de configuración se encuentran en `src/main/resources/application.properties`:
+
+| Propiedad                          | Descripción                            | Valor por defecto                          |
+|------------------------------------|----------------------------------------|--------------------------------------------|
+| `server.port`                      | Puerto del servidor                    | `8091`                                     |
+| `spring.datasource.url`            | URL de conexión a la base de datos     | `jdbc:postgresql://localhost:5432/movieslibrary` |
+| `spring.datasource.username`       | Usuario de la base de datos            | `postgres`                                 |
+| `spring.datasource.password`       | Contraseña de la base de datos         | `root`                                     |
+| `spring.jpa.hibernate.ddl-auto`    | Estrategia de esquema de BD            | `update` (auto-actualiza tablas)          |
+| `jwt.secret`                       | Clave secreta para firmar JWT          | *(configurar en producción)*               |
+| `jwt.expiration`                   | Expiración del JWT (ms)               | `86400000` (24 horas)                     |
+| `app.uploads.dir`                  | Directorio de archivos subidos         | `uploads/`                                 |
+| `app.backend.url`                  | URL base del backend                   | `http://localhost:8091`                    |
+| `spring.servlet.multipart.max-file-size` | Tamaño máximo de archivo         | `10MB`                                     |
+
+---
+
 ## Arquitectura del Proyecto
 
-El proyecto sigue una arquitectura **layered (por capas)** con el patrón de **Single Responsibility Services**, donde
-cada operación CRUD tiene su propio servicio dedicado.
+El proyecto sigue una arquitectura **layered (por capas)** con el patrón de **Single Responsibility Services**, donde cada operación CRUD tiene su propio servicio dedicado.
 
 ```
 src/main/java/com/utntp/utnmovieslibrarybackend/
@@ -104,7 +206,7 @@ src/main/java/com/utntp/utnmovieslibrarybackend/
 │   ├── PasswordConfig.java                    ← Bean BCryptPasswordEncoder
 │   ├── SecurityConfig.java                    ← SecurityFilterChain
 │   ├── UserPrincipal.java                     ← Implementación de UserDetails
-│   └── WebMvcConfig.java                      ← Servido de archivos estáticos (uploads)
+│   └── WebMvcConfig.java                      ← Servidor de archivos estáticos (uploads)
 │
 ├── service/                                   ← Capa de lógica de negocio
 │   ├── auth/                                  ← Login y Register
