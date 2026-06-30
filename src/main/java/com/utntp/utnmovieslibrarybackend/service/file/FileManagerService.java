@@ -13,7 +13,6 @@ import java.util.UUID;
 
 @Service
 public class FileManagerService {
-
     private final Path uploadsDir;
 
     public FileManagerService(@Value("${app.uploads.dir}") String uploadsDir) {
@@ -38,7 +37,9 @@ public class FileManagerService {
 
             String nameToSaveFile = UUID.randomUUID() + extension;
             Path pathToSaveFile = this.uploadsDir.resolve(subDir + nameToSaveFile);
-
+            // ensure the target subdirectory exists
+            Files.createDirectories(pathToSaveFile.getParent());
+            
             Files.copy(file.getInputStream(), pathToSaveFile, StandardCopyOption.REPLACE_EXISTING);
 
             return pathToSaveFile.toString().replace('\\', '/');
